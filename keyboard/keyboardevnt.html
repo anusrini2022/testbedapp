@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>keyboardinputelement</title>
+</head>
+
+<body>
+    <h1>Keyboard Events</h1>
+    <p>Enter your input<input type="text" id="inputkeydown"></p>
+    <p>Enter your input<input type="text" id="inputkeyup"> </p>
+    <p>Enter your input<input type="text" id="inputkeypress"> </p>
+    <p id="keydown"></p>
+    <p id="keyup"></p>
+    <p id="keypress"></p>
+
+
+    <script>
+        var events=[];
+        //keydownevent
+        keydowninput = document.getElementById("inputkeydown");
+        keydowninput.addEventListener("keydown", keydownfunction);
+
+        //keyupevent
+        keyupinput = document.getElementById("inputkeyup");
+        keyupinput.addEventListener("keyup", keyupFunction)
+
+        //keypressevent
+        keypressinput = document.getElementById("inputkeypress");
+        keypressinput.addEventListener("keypress", keypressFunction)
+        function keydownfunction(event) {
+            console.log("KeydownEvent");
+            
+            //console.log(event);
+            var ele=event.srcElement;
+            //alert(ele);
+            //console.log("SourceElement:" +event.srcElement);
+            //console.log("Key Pressed:" + event.key);
+            var  keydown=[{"Eventname":event.type,"SourceElement":event.target.tagName,"keypressed": event.key}];
+            events.push(keydown);
+            console.log(events);
+            document.getElementById("keydown").innerHTML=JSON.stringify(events);
+           
+        }
+
+        function keyupFunction(event) {
+            //console.log("KeyupEvent");
+            //console.log("Key Pressed:" + event.key);
+            var keyup=[{"Eventname":event.type,"keypressed": event.key}];
+            events.push(keyup);
+            console.log(events);
+            document.getElementById("keyup").innerHTML=JSON.stringify(events);
+        }
+
+        function keypressFunction(event) {
+            //console.log("KeypressEvent");
+            //console.log("Key Pressed:" + event.key);
+            var keypress=[{"Eventname":event.type,"keypressed": event.key}];
+            events.push(keypress);
+            console.log(events);
+            document.getElementById("keypress").innerHTML=JSON.stringify(events);
+
+        }
+      
+    </script>
+    <a href="keyboard/keyboardglobal">keyboardglobal</a>
+    <a href="keyboard/gettextvalue">GetTextValue</a>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iframeonload</title>
+</head>
+<body>
+    <!-- after form  has loaded the iframe is created and appended to the body of the document using javascript -->
+    <h1> Iframe Loading</h1>
+    <button id="" onclick="removeIframe()"> removeIframe</button>
+
+    <script>
+        //creating an iframe html element
+        var frame=document.createElement("IFRAME");
+        //setting attributes dynamically using setAttribute function
+        frame.setAttribute("id","myframe");
+        frame.setAttribute("src","content.html");
+        //Appending  iframe in document
+        document.body.appendChild(frame);
+
+        function removeIframe()
+        {
+            var myframe=document.getElementById("myframe");
+            myframe.remove();
+            
+        }
+    
+
+    </script>
+</body>
+</html>

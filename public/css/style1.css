@@ -1,0 +1,16 @@
+#inputformtable,tr,th,td
+{
+    border: 1px solid black;
+    border-collapse: collapse;
+
+}
+
+#inputformtable
+{
+    width:50%;
+}
+
+p
+{
+    font-size:20px;
+}

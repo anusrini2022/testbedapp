@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="js/bootstrap.bundle.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+
+  <h1> bootstrap</h1>
+  <button  id="toastbtn" class="btn btn-secondary">showtoast</button>
+  
+
+  
+
+  <div class="toast" id="toastelmnt">
+    <div class="toast-header">
+      <h5>Toast Header</h5>
+    </div>
+    <div class="toast-body">
+      <h6>alert Messages</h6>
+    </div>
+  </div>
+
+  <script type="module">
+    import *  as bootstrapmodule from './js/bootstrap.js';
+   
+    //import { Toast } from './js/bootstrap.esm.min.js';
+
+    var btn=document.getElementById("toastbtn");
+    var elemnt=document.getElementById("toastelmnt");
+    console.log(btn);
+    btn.addEventListener('click',function(){
+      let toast=new bootstrap.Toast(elemnt);
+      //let toast =new Toast("elemnt");
+      toast.show();
+    });
+
+    
+   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
+</body>
+
+</html>

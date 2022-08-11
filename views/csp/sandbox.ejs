@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  <%= title %></title>
+    <link rel="stylesheet" href="/css/cspstyle.css">
+    <%- include("../partials/header") %>
+</head>
+<body>
+<div class="container">
+<h4> Sandbox</h4>
+<% if(csp=="" ) { %>
+<p>The HTTP Content-Security-Policy (CSP) sandbox directive enables a sandbox for the requested resource
+ similar to the <b>iframe sandbox</b> attribute. If we specify the sadbox without value it will not load the resources
+ <b>Content-Security-Policy: sandbox; </b>If we specify the sandbox with value it will allow the resources to display
+ <b>Content-Security-Policy: sandbox value;</b></p>
+ <table class="table table-bordered">
+  <tr>
+    <th>No</th>
+    <th>Directives</th>
+     <th>Demo</th>
+     <th>Sandbox</th>
+     <th>Sanbox value</th>
+ </tr>
+  <tr>
+ <td>1</td>
+ <td>allow-script</td>
+ <td> <a class="btn btn-primary" href="sandbox/dir/?dir=sandbox&csp=off" target="_blank">Withoutcsp</a></td>
+ <td> <a class="btn btn-primary" href="sandbox/dir/?dir=sandbox&csp=on" target="_blank">Withcsp</a></td>
+ <td> <a class="btn btn-primary" href="sandbox/dir/?dir=sandboxallow&csp=on"  target="_blank">Withcsp</a>
+ </td>
+</tr>
+
+  <tr>
+ <td>2</td>
+  <td>same-origin</td>
+  <td><a class="btn btn-primary" href="sandbox/sameorgindir/?dir=sameorgindir&csp=off" target="_blank">Withoutcsp</a> </td>
+ <td> <a class="btn btn-primary" href="sandbox/sameorgindir/?dir=sameorgindir&csp=on"  target="_blank">Withcsp</a> </td>
+  <td> <a class="btn btn-primary" href="sandbox/sameorgindir/?dir=sandboxsameorgindir&csp=on" target="_blank">Withcsp</a> </td>
+  </tr>
+    <tr>
+    <td>3</td>
+    <td>allow-form</td>
+    <td> <a class="btn btn-primary" href="sandbox/allowformdir/?dir=allowformdir&csp=off" target="_blank">Withoutcsp</a></td>
+    <td> <a class="btn btn-primary" href="sandbox/allowformdir/?dir=allowformdir&csp=on"   target="_blank">Withcsp</a>  </td>
+    <td> <a class="btn btn-primary" href="sandbox/allowformdir/?dir=sandboxallowformdir&csp=on"  target="_blank">Withcsp</a> </td>
+     </tr>
+     <tr>
+    <td>4</td>
+    <td>top-nav</td>
+    <td><a class="btn btn-primary" href="sandbox/topnavdir/?dir=topnavdir&csp=off"target="_blank">Withoutcsp</a></td>
+     <td><a class="btn btn-primary" href="sandbox/topnavdir/?dir=topnavdir&csp=on" target="_blank">Withcsp</a></td>
+     <td><a class="btn btn-primary" href="sandbox/topnavdir/?dir=sandboxtopnavdir&csp=on" target="_blank">Withcsp</a></td>
+     </tr>
+    <tr>
+    <td>5</td>
+    <td>pop-up</td>
+    <td><a class="btn btn-primary" href="sandbox/popupdir/?dir=popupdir&csp=off" target="_blank">Withoutcsp</a></td>
+    <td><a class="btn btn-primary" href="sandbox/popupdir/?dir=popupdir&csp=on"   target="_blank">Withcsp</a></td>
+    <td><a class="btn btn-primary" href="sandbox/popupdir/?dir=sandboxpopupdir&csp=on" target="_blank">Withcsp</a></td></tr>
+
+    <tr>
+   <td>6</td>
+  <td>allow-downloads</td>
+  <td><a class="btn btn-primary" href="sandbox/allowdownloaddir/?dir=allowdownloaddir&csp=off"target="_blank">Withoutcsp</a></td>
+  <td><a class="btn btn-primary" href="sandbox/allowdownloaddir/?dir=allowdownloaddir&csp=on" target="_blank">Withcsp</a></td>
+  <td><a class="btn btn-primary" href="sandbox/allowdownloaddir/?dir=sandboxallowdownloaddir&csp=on" target="_blank">Withcsp</a></td>
+  </tr>
+  <tr>
+ <td>7</td>
+ <td>allow-modal</td>
+ <td><a class="btn btn-primary" href="sandbox/allowmodaldir/?dir=allowmodaldir&csp=off" target="_blank">Withoutcsp</a></td>
+ <td><a class="btn btn-primary" href="sandbox/allowmodaldir/?dir=allowmodaldir&csp=on"target="_blank">Withcsp</a></td>
+ <td><a class="btn btn-primary" href="sandbox/allowmodaldir/?dir=sandboxallowmodaldir&csp=on" target="_blank">Withcsp</a></td>
+ </tr>
+
+
+ <tr>
+    <td>8</td>
+    <td>allow-downloads-without-user-activation</td>
+    <td><a class="btn btn-primary" href="sandbox/useractivation/?dir=useractivation&csp=off" target="_blank">Withoutcsp</a></td>
+    <td><a class="btn btn-primary" href="sandbox/useractivation/?dir=useractivation&csp=on"target="_blank">Withcsp</a></td>
+    <td><a class="btn btn-primary" href="sandbox/useractivation/?dir=sandboxuseractivation&csp=on" target="_blank">Withcsp</a></td>
+    </tr>
+
+    <tr>
+        <td>9</td>
+        <td>allow-popups-to-escape-sandbox</td>
+        <td><a class="btn btn-primary" href="sandbox/escapesandboxdir/?dir=escapesandbox&csp=off" target="_blank">Withoutcsp</a></td>
+        <td><a class="btn btn-primary" href="sandbox/escapesandboxdir/?dir=escapesandbox&csp=on"target="_blank">Withcsp</a></td>
+        <td><a class="btn btn-primary" href="sandbox/escapesandboxdir/?dir=sandboxescape&csp=on" target="_blank">Withcsp</a></td>
+        </tr>
+ </table>
+<% } %>
+<% if(dir=="sandbox" || dir=="sandboxallow" ){%>
+
+ <%=header %>
+ <br>
+<iframe src="/srcscript.html"></iframe>
+
+<br><br>
+<a class="btn btn-primary" href="/csp/sandbox">Back</a>
+ <% } %>
+ <% if(dir=="sameorgindir" || dir=="sandboxsameorgindir" ){%><%=header %>
+ <br>
+<iframe src="/iframe/sourcefile.html" sandbox></iframe>
+<br>
+<a class="btn btn-primary" href="/csp/sandbox">Back</a>
+ <% } %>
+<% if(dir=="allowformdir" || dir=="sandboxallowformdir" ){%>
+ <%=header %>
+<br>
+<iframe src="/iframe/submitform.html"></iframe>
+<br><br>
+ <a class="btn btn-primary" href="/csp/sandbox">Back</a>
+ <% } %>
+ <% if(dir=="topnavdir" || dir=="sandboxtopnavdir" ){%>
+<%=header %>
+<iframe src="/iframe/topnav.html"></iframe>
+<br><br>
+<a class="btn btn-primary" href="/csp/sandbox">Back</a>
+<% } %>
+<% if(dir=="popupdir" || dir=="sandboxpopupdir" ){%>
+ <%=header %> <iframe src="/iframe/popup.html"></iframe>
+<br><br>
+<a class="btn btn-primary"href="/csp/sandbox">Back</a>
+<% } %>
+<% if(dir=="allowdownloaddir" ||dir=="sandboxallowdownloaddir" ){%> 
+<%=header %>
+<h1>allow downloads </h1>
+<a href="/cspdir.html"class="btn btn-primary" download>download</a>
+
+<a class="btn btn-primary" href="/csp/sandbox">Back</a>
+  <% } %>
+
+ <% if(dir=="allowmodaldir" ||dir=="sandboxallowmodaldir"){%> 
+<%=header %><h1>allow modal</h1>
+<button id="myBtn" >openmodal</button>
+<div id="newmodal" class="modal" >
+<div class="modal-content">
+<span class="close">&times;</span><p>Some text in the Modal..</p>
+</div>
+</div>
+<script src="/script/modal.js"></script>
+<a class="btn btn-primary"  href="/csp/sandbox">Back</a>
+<% } %>
+<% if(dir=="useractivation" ||dir=="sandboxuseractivation"){%> 
+    
+    <%=header %>
+   
+    <script>
+       
+    setTimeout(function () { window.location = "/cspdir.html" ; }, 5000)
+    </script>
+    <a class="btn btn-primary"  href="/csp/sandbox">Back</a>
+
+    <% } %>  
+    
+    <% if(dir=="escapesandbox" ||dir=="sandboxescape"){%> 
+        <h1>allow-popups with escape sandbox</h1>
+        <%=header %>
+        <iframe src="/iframe/popup.html" width="300px" height="300px"></iframe>
+        <a class="btn btn-primary"  href="/csp/sandbox">Back</a>
+    
+        <% } %>
+        <%if(csp=="on") { %>
+        <%- include("../partials/violationevent") %>     
+        <% } %>
+        <input type="text" name="directives" value=violatedDirective>       
+
+</body>
+
+</html>

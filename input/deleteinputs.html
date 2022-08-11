@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- On clciking the removeinput button we can delete the  input fields -->
+    <input type="text" id="input1">
+    <input type="text" id="input2">
+    <input type="text" id="input3">
+    <button onclick="removeInput()">remove</button>
+
+    <script>
+        function removeInput()
+        {
+            //getting the id of the input and using remove method we can remove that field
+           var input1=document.getElementById("input1");
+           var input2=document.getElementById("input2");
+           var input3=document.getElementById("input3");
+           input1.remove(); 
+           input2.remove();
+           input3.remove();
+        }
+    </script>
+
+</body>
+</html>

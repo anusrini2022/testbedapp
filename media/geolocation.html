@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>geolocation</title>
+</head>
+<body>
+   <h1>geolocation</h1> 
+   <p>Click the button to get your current location</p>
+   
+   <button onclick="getLocation()">GetMyLocation</button>
+   <p id="loc"></p>
+   <p id="country"></p>
+   <p id="state"></p>
+   <p id="city"></p>
+</body>
+<script>
+    var x=document.getElementById("loc");
+     
+    function getLocation()
+    {
+   //checking geolocation  has supported by browser
+    if(navigator.geolocation)
+    {
+        navigator.geolocation.getCurrentPosition(showLocation);
+    }
+    else
+    console.log("Location is not supported in this browser");
+}
+function showLocation(position)
+{
+    var latitude= position.coords.latitude;
+    var  longitude=position.coords.longitude
+    var country=document.getElementById("country");
+    var state=document.getElementById("state");
+    var city=document.getElementById("city");
+
+    x.innerHTML="Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+  const geolocapiurl="https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=latitude&longitude=longitude&localityLanguage=en";
+  fetch(geolocapiurl).then((res)=>res.json())
+   .then((data)=>{
+      console.log(data) ;
+      country.innerHTML="Country:"+data.countryName;
+      state.innerHTML="State:"+data.principalSubdivision;
+      city.innerHTML="City:"+data.city;
+   })
+
+}
+
+</script>
+</html>

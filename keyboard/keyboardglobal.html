@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>keydowneventglobal</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <h1>Keyboard Event</h1>
+    Press Any key 
+    <input type="text" id="txt">
+     <p id="demo"></p>
+    </div>
+    <script>
+
+
+        //adding event for winodw if we press any key on the document it will trigger the event
+    
+        window.addEventListener('keydown', keydownfunction);
+
+        window.addEventListener('keyup', keyupfunction);
+        window.addEventListener('keypress', keypressfunction);
+         
+        var events=[];
+
+        function keydownfunction(event) {
+            // console.log("KeydownEvent");
+            // console.log("keyPressed:" + event.key);
+            console.log(event);
+            var keydown={"EventName": event.type, "keyPressed:" : event.key};
+            events.push(keydown);
+            console.log(events);
+            document.getElementById("demo").innerHTML=JSON.stringify(events);
+        }
+
+
+        function keyupfunction() {
+            // console.log("keyupevent");
+            // console.log("keyPressed:" + event.key);
+            var keyup={"EventName":event.type,"keyPressed:" : event.key};
+            events.push(keyup);
+            console.log(events);
+            document.getElementById("demo").innerHTML=JSON.stringify(events);
+        }
+
+        function keypressfunction() {
+            // console.log("keypressEvent");
+            // console.log("keyPressed:" + event.key);
+            var keypress={"EventName":event.type,"keyPressed:" : event.key};
+            events.push(keypress);
+            console.log(events);
+            document.getElementById("demo").innerHTML=JSON.stringify(events);
+        }
+       // document.write(JSON.stringify(events));
+    </script>
+</body>
+
+</html>

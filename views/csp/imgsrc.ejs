@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include("../partials/header") %>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Image </h1>
+    
+    <% if(csp=="" ) { %>
+        <a class="btn btn-primary" href="imgsrc/dir/?dir=imgsrc&csp=off" target="_blank">Withoutcsp</a>
+        <a class="btn btn-primary" href="imgsrc/dir/?dir=imgsrc&csp=on" target="_blank">Withcsp</a>
+        <% } %>
+        <br>
+        <img src="http://blog.detectify.com/wp-content/uploads/2019/07/CSP-3-text.png" width="500px" height="500px"
+        alt="Image" />
+            <%if(csp=="on") { %>
+                <%- include("../partials/violationevent") %>
+                <% } %>
+</body>
+
+</html>

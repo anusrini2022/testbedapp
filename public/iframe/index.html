@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iframe in javascript </title>
+</head>
+
+<body>
+
+    <!-- <h1>Input fields</h1>
+    <a href="inputform.html">AddInputs</a>
+    <p><a href="deleteinputs.html">deleteinputs</a></p>
+    <p><a href="hiddeninput.html">hiddeninput</a></p> -->
+
+    <h1>Types of Iframes</h1>
+    <a href="loadingiframe.html">IframeOnload</a>
+    <a href="hiddeniframe.html">HiddenIframe</a>
+    <a href="minimizediframe.html">minimizediframe</a>
+
+    <h3>Click here to open iframe</h3>
+    <button onclick="showFrame()">open iframe</button>
+    <button onclick="srcDoc()">SourceDocument</button>
+    
+
+    <h3>Sandbox properties</h3>
+    <button onclick="sandBox()">SandBox</button>
+    <button onclick="scriptLoad()">Loading Script</button>
+    <button onclick="formLoad()">FormSubmit</button>
+    <button onclick="topNavigation()">TopNavigation</button>
+    <button onclick="allowPopups()">Popups</button>
+
+    <h3>ContentWindow and ContentDocument Properties</h3>
+    <p>Click the contentWindow button to open an iframe and click the changeBackground or ChangeContent button to change the background or content</p>
+    <button onclick="contentWindow()">contentWindow </button>
+    <button onclick="changeBackground()">ChangeBackground </button>
+    <button onclick="changeContent()">ChangeContent </button>
+    <p id="demo"></p>
+
+    <script>
+        function showFrame() {
+
+            var x = document.createElement("IFRAME");
+            x.setAttribute("id", "myframe");
+            x.setAttribute("src", "sourcefile.html");
+            document.body.appendChild(x);
+            var url = document.getElementById("myframe").src;
+            document.getElementById("demo").innerHTML = "Url of the Frame:" + url
+        }
+
+        function srcDoc() {
+
+            var x = document.createElement("IFRAME");
+            x.setAttribute("id", "myframe");
+            x.setAttribute("srcdoc", "<h2>New Iframe </h2>");
+            document.body.appendChild(x);
+            var srcdoc = document.getElementById("myframe").srcdoc;
+            document.getElementById("demo").innerHTML = "SourceDocument  of the Frame:" + srcdoc;
+        }
+
+
+
+        function sandBox() {
+
+            var x = document.createElement("IFRAME");
+            x.setAttribute("src", "sourcefile.html");
+            x.setAttribute("id", "myframe");
+            x.setAttribute("sandbox", "");
+            document.body.appendChild(x);
+            var sandbox = document.getElementById("myframe").sandbox;
+            document.getElementById("demo").innerHTML = "Sandbox of the Frame:" + sandbox;
+        }
+
+        function scriptLoad() {
+
+            var x = document.createElement("IFRAME");
+            x.setAttribute("src", "srcscript.html");
+            x.setAttribute("id", "myframe");
+            x.setAttribute("sandbox",  "allow-scripts");
+            document.body.appendChild(x);
+            var sandbox = document.getElementById("myframe").sandbox;
+            document.getElementById("demo").innerHTML = "Sandbox of the Frame:" + sandbox;
+        }
+
+
+        function formLoad() {
+
+            var x = document.createElement("IFRAME");
+            x.setAttribute("src", "submitform.html");
+            x.setAttribute("id", "myframe");
+            x.setAttribute("sandbox", "allow-forms");
+            document.body.appendChild(x);
+            var sandbox = document.getElementById("myframe").sandbox;
+            document.getElementById("demo").innerHTML = "Sandbox of the Frame:" + sandbox;
+        }
+
+        function topNavigation() {
+
+            var x = document.createElement("IFRAME");
+            x.setAttribute("src", "topnav.html");
+            x.setAttribute("id", "myframe");
+            x.setAttribute("sandbox", "allow-same-orgin allow-top-navigation");
+            document.body.appendChild(x);
+            var sandbox = document.getElementById("myframe").sandbox;
+            document.getElementById("demo").innerHTML = "Sandbox of the Frame:" + sandbox;
+        }
+
+
+        function allowPopups() {
+
+            var x = document.createElement("IFRAME");
+            x.setAttribute("src", "popup.html");
+            x.setAttribute("id", "myframe");
+            x.setAttribute("sandbox", " allow-popups");
+            document.body.appendChild(x);
+            var sandbox = document.getElementById("myframe").sandbox;
+            document.getElementById("demo").innerHTML = "Sandbox of the Frame:" + sandbox;
+        }
+
+        function contentWindow(){
+            var x=document.createElement("IFRAME");
+            var btn=document.createElement("BUTTON");
+            var t=document.createTextNode("Changebackground");
+
+            var btn1=document.createElement("BUTTON");
+            var t1=document.createTextNode("Changecontent");
+           
+            btn.appendChild(t);
+            btn1.appendChild(t1);
+
+            x.setAttribute("src","content.html");
+            x.setAttribute("id","myframe");
+            
+            
+            document.body.appendChild(x);
+            document.body.appendChild(btn);
+            document.body.appendChild(btn1);
+            var val=document.getElementById("myframe");
+            var val1=val.contentWindow;
+            var iframedoc=val.contentDocument;
+            console.log(val1);
+            console.log(iframedoc);
+            btn.setAttribute("onclick","changeBackground()");
+            btn1.setAttribute("onclick","changeContent()");
+            //val1.body.style.backgroundColor="red"
+            
+
+
+        }
+
+        function changeBackground(){
+            // var x=document.createElement("IFRAME");
+            
+            // x.setAttribute("src","content.html");
+            // x.setAttribute("id","myframe");
+            
+            
+            // document.body.appendChild(x);
+             var val=document.getElementById("myframe");
+            var val1=val.contentWindow.document;
+             
+            console.log(val1);
+            //btn.setAttribute("onclick","ChangeBackground(val1)");
+            val1.body.style.backgroundColor="red"
+            
+
+
+        }
+
+        function changeContent(){
+
+            var val=document.getElementById("myframe");
+            var iframedoc=val.contentDocument;
+            console.log(iframedoc);
+           
+            var para="ContentDocument will update the content"
+            const iframeheading=iframedoc.querySelector("h1");
+            const iframepara=iframedoc.querySelector("p")
+            alert("New Heading and paragraph");
+            iframeheading.textContent="New Content";
+            iframepara.textContent=para;
+        }
+
+        
+    </script>
+
+</body>
+
+</html>

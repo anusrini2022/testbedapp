@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Submitting form using beacon</h1>
+    <h1>Enter your Details</h1>
+    <form id="myform" method="post">
+        Enter Your Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="uname"  id="uname"><br><br>
+        Enter Your Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" name="uemail" id="email"><br><br>
+        Enter your Password:&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="upwd" id="pwd"><br><br>
+        <p id="res">UserDetails:</p>
+        <button type="submit">submit</button>
+      
+    </form>
+    <script>
+   const myform=document.getElementById("myform");
+   myform.addEventListener("submit",function(eve){
+
+   eve.preventDefault();
+    // URL to send the data to
+let url = '/form/userdet';
+var uname=document.getElementById("uname").value;
+var email=document.getElementById("email").value;
+console.log(uname);
+console.log(email);
+// Create a new FormData and add a key/value pair
+let data = {"uname":uname,"email":email}
+
+let result = navigator.sendBeacon(url,JSON.stringify(data));
+document.getElementById("res").innerHTML+=JSON.stringify(data);
+
+
+if (result) { 
+  console.log('Successfully queued!');
+  console.log(result);
+} else {
+  console.log('Failure.');
+}
+})
+
+</script>
+<a href="/">home</a>
+</body>
+</html>

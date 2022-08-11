@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--bootstrap-->
+    <%- include("../partials/header") %>
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/cspstyle.css">
+</head>
+<body>
+
+    <h1>Font src</h1>
+    
+  <p>This is the font from external website</p>
+        
+    <% if(csp=="") { %>
+        <a  class="btn btn-primary" href="fontsrc/dir/?dir=fontsrc&csp=off"  target="_blank">Withoutcsp</a>
+        <a class="btn btn-primary" href="fontsrc/dir/?dir=fontsrc&csp=on"  target="_blank">Withcsp</a>
+        <% } %>
+        <%if(csp=="on") { %>
+            <%- include("../partials/violationevent") %>
+        <% } %>
+</body>
+</html>

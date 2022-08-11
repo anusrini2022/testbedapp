@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textvalue</title>
+</head>
+<body>
+  <h1>Getting Text value</h1>  
+  
+  <p>Enter Your Text:<input type="text" id="txt1" name="text1"  class="textboxes"  onchange="getTextValue()"></p>
+ 
+  <p id="byid"></p>
+  <p id="byname"></p>
+  <p id="bytag"></p>
+  <p id="byclass"></p>
+  <p id="byselector"></p>
+  <script>
+    
+
+      function  getTextValue()
+      {
+          var val=document.getElementById("txt1");
+          document.getElementById("byid").innerHTML="Getting value by Id:"+val.value;
+
+          var valbyname=document.getElementsByName("text1");
+          document.getElementById("byname").innerHTML="Getting value by Name:"+valbyname[0].value;
+
+          var valbytag=document.getElementsByTagName("input");
+          document.getElementById("bytag").innerHTML="Getting value by TagName:"+valbytag[0].value;
+
+          var valbyclass=document.getElementsByClassName("textboxes");
+          document.getElementById("byclass").innerHTML="Getting value by ClassName:"+valbyclass[0].value;
+
+          var valbyselector=document.querySelector("input");
+          document.getElementById("byselector").innerHTML="Getting value by querySelector:"+valbyselector.value;
+
+   
+
+      }
+  </script>
+</body>
+</html>

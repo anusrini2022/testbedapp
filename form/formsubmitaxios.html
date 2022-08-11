@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Submitting form using Axios</h1>
+    <h2>Enter your Details</h2>
+    <form method="post"  id="myform" method="post">
+        Enter Your Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="uname" id="uname"><br><br>
+        Enter Your Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" name="uemail" id="email"><br><br>
+        Enter your Password:&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="upwd"><br><br>
+        <p id="status"></p>
+        <p id="res"></p>
+        <button type="submit">submit</button>
+        
+    </form>
+    <a href="/">home</a>
+    <script>
+    var myform=document.getElementById("myform");
+    myform.addEventListener("submit", async function(eve){
+        eve.preventDefault();
+        var uname=document.getElementById("uname").value;
+        var email=document.getElementById("email").value;
+        var user={
+            uname:uname,
+            email:email
+        }
+        try{
+        const response=await axios.post("/form/userdet",user)
+        console.log("Data Posted Successfully");
+        console.log(response.data);
+        document.getElementById("status").innerHTML="Status:"+response.status;
+        document.getElementById("res").innerHTML="Data:"+JSON.stringify(response.data);
+        }catch(error)
+        {
+            if(error.respnse)
+            {
+                console.log(error.response.status)
+            }
+            else{
+                console.log(error.message)
+            }
+        }
+
+    })
+    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>

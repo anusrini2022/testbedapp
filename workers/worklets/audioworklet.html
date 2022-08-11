@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio worklet</title>
+</head>
+<body>
+    <video></video>
+    <script>
+        var video=document.querySelector("video");
+    if (navigator.mediaDevices) {
+        console.log('getUserMedia supported.');
+        navigator.mediaDevices.getUserMedia ({audio: true, video: true})
+        .then(function(stream) {
+            video.srcObject = stream;
+            video.onloadedmetadata = function(e) {
+                video.play();
+                //video.muted = true;
+            };
+    
+            // Create a MediaStreamAudioSourceNode
+            // Feed the HTMLMediaElement into it
+            var audioCtx = new AudioContext();
+            audioCtx.audioWorklet.addModule('/script/TestWorklet.js').then(()=>{
+            var source = audioCtx.createMediaStreamSource(stream);
+            const worklet = new AudioWorkletNode(audioCtx, "TestWorklet");
+
+    source.connect(worklet);
+    const constantSourceNode = new ConstantSourceNode(audioCtx);
+
+// 0.0001 is an arbitrary value
+// maybe it needs to be bigger
+
+// maybe a smaller value works as well
+constantSourceNode.offset.value = 0.0001;
+
+constantSourceNode.connect(audioCtx.destination);
+constantSourceNode.start();
+
+     audioCtx.resume();
+    return true;
+        })
+        //TestWorklet.port.onmessage = (samples) => { FillMicBuffer (samples.data)};
+    });
+        }
+        else
+        {
+            console.log("UserMedia not suppoted By Your Browsser")
+        }
+    </script>
+</body>
+</html>

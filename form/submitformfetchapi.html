@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Submitting form using FetchAPI</h1>
+    <h2>Enter your Details</h2>
+    <form method="post"  id="myform">
+        Enter Your Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="uname" id="uname"><br><br>
+        Enter Your Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" name="uemail" id="email"><br><br>
+        Enter your Password:&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="upwd"><br><br>
+        <p id="status"></p>
+        <p id="res"></p>
+        <button type="submit">submit</button>
+     
+    </form>
+    <script>
+        const  form=document.getElementById("myform");
+        form.addEventListener('submit',function(eve){
+         eve.preventDefault();
+         var uname=document.getElementById("uname").value;
+         var uemail=document.getElementById("email").value;
+         
+         fetch("http://localhost:3001/form/userdet",{
+             method:'POST',
+             body:JSON.stringify({
+              uname:uname,
+              uemail:uemail
+
+              }),
+          headers:{
+               'Content-type':'application/json; charset=UTF-8'
+            }
+         })
+         .then(function(response){
+            return response.json();
+         })
+         .then(function(data){
+             console.log(data);
+             var res=document.getElementById("res");
+            res.innerHTML=JSON.stringify(data);
+         })
+
+         
+         .catch(error=>console.error("Error:",error))
+    
+           
+
+         
+        });
+
+    </script>
+    <a href="/">home</a>
+</body>
+</html>

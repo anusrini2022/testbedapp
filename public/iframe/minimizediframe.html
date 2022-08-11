@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>minimizediframe</title>
+</head>
+<body>
+    <h1>Minimized Iframe</h1>
+    <script>
+
+        //The Iframe can be minimised by  reducing the  default width and height 
+        var frame=document.createElement("IFRAME");
+        frame.setAttribute("id","myframe");
+        frame.setAttribute("src","sourcefile.html");
+        frame.setAttribute("width","100px");
+        frame.setAttribute("height","100px");
+        document.body.appendChild(frame) ; 
+        var framewidth=document.getElementById("myframe").width;
+        var frameheight=document.getElementById("myframe").height;
+         //alert(framewidth);
+         //alert(frameheight);
+
+    </script>
+</body>
+</html>

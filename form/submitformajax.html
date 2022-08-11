@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+
+<body>
+    <h1>Submitting form using Ajax</h1>
+
+    <h2>Enter your Details</h2>
+    <form id="myform">
+        Enter Your Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="uname"
+            id="uname"><br><br>
+        Enter Your Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" name="uemail"
+            id="email"><br><br>
+        Enter your Password:&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="upwd" id="pwd"><br><br>
+        <p id="Name">UserDetails:</p>
+        <button type="submit">submit</button>
+       
+    </form>
+    <script>
+        var myform = document.getElementById("myform");
+        myform.addEventListener("submit", function (event) {
+            event.preventDefault();
+            var uname = document.getElementById("uname").value;
+            console.log(uname);
+            var email = document.getElementById("email").value;
+            console.log(email);
+            var pwd = document.getElementById("pwd").value;
+            console.log(pwd);
+            var xhttp = new XMLHttpRequest();
+            console.log(xhttp);
+
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("Name").innerHTML += this.responseText;
+                    console.log(this.responseText);
+
+
+                }
+            };
+
+            xhttp.open("POST", "/form/userdet", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send(`uname=${uname}&email=${email}`);
+
+        })
+
+    </script>
+    <a href="/">home</a>
+</body>
+
+</html>

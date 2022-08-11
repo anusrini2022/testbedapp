@@ -1,0 +1,16 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+p {
+    font-family: 'Poppins', sans-serif;
+   
+
+}
+
+
+.modal
+{
+    display: none;
+    width:300px;
+    height: 300px;
+    
+                                    
+}

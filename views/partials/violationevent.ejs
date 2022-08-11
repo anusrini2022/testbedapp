@@ -1,0 +1,34 @@
+<p><b>Status:</b><%=csp %> </p>
+<p><b>Header:</b><%=header %></p>
+<h5>Violation Event</h5>
+
+<table class="table table-bordered">
+<tr>
+<th>ViolatedDirective</th>
+<td id="directives" name="directives"></td>
+</tr>
+<tr>
+<th>ViolatedPolicy</th>
+<td id="policy"></td>
+</tr>
+<tr>
+<th>BlockedURL</th>
+<td id="url"></td>
+</tr>
+</table>
+
+
+
+<script> 
+if ('SecurityPolicyViolationEvent' in window) { // Check browser support of SecurityPolicyViolationEnevt interface
+console.log("Security Policy event Supported");
+window.addEventListener('securitypolicyviolation', function (e) { // Add SecurityPolicyViolation enevt handler
+    console.log("policy"+{ violatedDirective: e.violatedDirective, originalPolicy: e.originalPolicy });
+    document.getElementById("directives").innerHTML = e.violatedDirective;
+    document.getElementById("policy").innerHTML = e.originalPolicy;
+    document.getElementById("url").innerHTML = e.blockedURI;
+}); 
+}
+else
+consoloe.log("Security Policy event  not Supported");
+</script>

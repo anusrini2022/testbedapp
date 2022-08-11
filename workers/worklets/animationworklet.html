@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation worklet</title>
+    <style>
+        .parallax {
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: 0.5;
+        }
+        </style>
+</head>
+<body>
+    <h1>animation Worklet</h1>
+    <div id='scrollingContainer'>
+        <div id="slow" class="parallax"></div>
+        <div id="fast" class="parallax"></div>
+      </div>
+      
+      <script>
+          
+          if ('animationWorklet' in CSS) {
+  // AnimationWorklet is supported!
+  console.log("supported");
+}
+else
+{
+    console.log("Not supported by your browser");
+}
+       //CSS.animationWorklet.addModule('passthrough-aw.js');
+    
+      
+    //   const parallaxSlowEl = document.getElementById('slow');
+    //   const parallaxFastEl = document.getElementById('fast');
+    //   const scrollingContainerEl = document.getElementById('scrollingContainer');
+      
+    //   const scrollTimeline = new ScrollTimeline({
+    //     scrollSource: scrollingContainerEl,
+    //     orientation: 'block',
+    //     timeRange: 1000
+    //   });
+    //   const scrollRange = scrollingContainerEl.scrollHeight - scrollingContainerEl.clientHeight;
+      
+    //   const slowParallax = new WorkletAnimation(
+    //       'parallax',
+    //       new KeyframeEffect(parallaxSlowEl,
+    //           {'transform': ['translateY(0)', 'translateY(' + -scrollRange + 'px)']},
+    //           {duration: scrollTimeline.timeRange}),
+    //       scrollTimeline,
+    //       {rate : 0.4}
+    //   );
+    //   slowParallax.play();
+      
+    //   const fastParallax = new WorkletAnimation(
+    //       'parallax',
+    //       new KeyframeEffect(parallaxFastEl,
+    //           {'transform': ['translateY(0)', 'translateY(' + -scrollRange + 'px)']},
+    //           {duration: scrollTimeline.timeRange}),
+    //       scrollTimeline,
+    //       {rate : 0.8}
+    //   );
+    //   fastParallax.play();
+    
+    
+      </script>
+   
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>layoutwoklet</title>
+    <style>
+        .child-0 {
+          width: 380px;
+          border: solid 10px;
+        }
+        
+        .child-1 {
+          border: solid 5px;
+        }
+        
+        .box {
+          display: layout(intrinsic-sizes-example);
+          font: 25px/1 Ahem;
+        }
+        </style>
+</head>
+<body>
+    <h1>Layout worklet example</h1>
+    <div class="box">
+        <div class="child-0"></div>
+        <div class="child-1">XXX XXXX</div>
+      </div>
+      <script>
+          
+      registerLayout('intrinsic-sizes-example', class {
+          intrinsicSizes(children, edges, styleMap) {
+            const childrenSizes = yield children.map((child) => {
+                return child.intrinsicSizes();
+            });
+      
+            childrenSizes[0].minContentSize; // 400, (380+10+10) child has a fixed size.
+            childrenSizes[0].maxContentSize; // 400, (380+10+10) child has a fixed size.
+      
+            childrenSizes[1].minContentSize; // 100, size of "XXXX".
+            childrenSizes[1].maxContentSize; // 200, size of "XXX XXXX".
+          }
+      
+          layout() {}
+
+      });
+      </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include("../partials/header") %>
+    <title>Worker</title>
+    <script src="/script/main.js"></script>
+</head>
+<body>
+    <h1>Worker Src</h1>
+    <%=csp %>
+    <%=msg %>
+    <p id="res"></p>
+     
+        <br>
+        <h1>Web workers</h1>
+    <!-- webworkers -->
+
+
+  <p>Count numbers: <output id="result"></output></p>
+  <button onclick="startWorker()">Start Worker</button>
+  <button onclick="stopWorker()">Stop Worker</button>
+  
+       
+    
+        <% if(csp=="" ) { %>
+            <a class="btn btn-primary" href="workersrc/dir/?dir=workersrc&csp=off" target="_blank">Withoutcsp</a>
+            <a class="btn btn-primary" href="workersrc/dir/?dir=workersrc&csp=on" target="_blank">Withcsp</a>
+             <% } %> 
+        <%if(csp=="on") { %>
+            <%- include("../partials/violationevent") %>
+                    <% } %>
+
+   
+    
+</body>
+</html>

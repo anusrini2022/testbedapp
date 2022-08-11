@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title><%=title %></title>
+    <%- include("../partials/header") %>
+
+
+
+</head>
+<body>
+    <p id="demo"></p>
+    <h1>Script src</h1>
+   
+   <% if(csp=="") { %>
+    <a  class="btn btn-primary" href="scriptsrc/dir/?dir=scriptsrc&csp=off"  target="_blank">Withoutcsp</a>
+    <a class="btn btn-primary" href="scriptsrc/dir/?dir=scriptsrc&csp=on"  target="_blank">Withcsp</a>
+    <a  class="btn btn-primary" href="/scriptsrc/?dir=unsafeinline&csp=on"  target="_blank">unsafeinline</a>
+    <a class="btn btn-primary" href="/scriptsrc/?dir=nonce&csp=on"  target="_blank">nonce</a>
+    <% } %>
+   
+    <script nonce="b3097129">
+        document.getElementById("demo").innerHTML="This is content from Inline Script"
+    </script>
+    
+    <%if(csp=="on") { %>
+        <%- include("../partials/violationevent") %>
+    <% } %>
+    </body>
+</html>

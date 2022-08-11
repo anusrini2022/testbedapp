@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Submitting form using jquery</h1>
+    <h2>Enter your Details</h2>
+    <form method="post" action="/userdet" id="myform" method="post">
+        Enter Your Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="uname" id="uname"><br><br>
+        Enter Your Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" name="uemail" id="email"><br><br>
+        Enter your Password:&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="upwd"><br><br>
+        <p id="status"></p>
+        <p id="res"></p>
+        <button type="submit">submit</button>
+
+    </form>
+    <a href="/">home</a>
+    <script>
+        
+        $(document).ready(function(){
+           $("#myform").on('submit',function(eve){
+            {eve.preventDefault();
+            var uname=$("#uname").val();
+            var email=$("#email").val();
+            alert(uname);
+            alert(email);
+               $.post("/form/userdet",{
+                   uname:uname,
+                   email:email
+               },
+               function(data,status)
+               {
+                   alert("data:"+JSON.stringify(data)+"status:"+status);
+                   $("#status").html("Status:"+status);
+                   $("#res").html("Data:"+JSON.stringify(data));
+               });
+            }
+           });
+
+        });
+    </script>
+
+
+</body>
+</html>

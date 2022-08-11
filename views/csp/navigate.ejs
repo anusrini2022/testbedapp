@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <%- include("../partials/header") %>
+  
+     <!-- <title>Document</title>
+     Navigation directives instruct the browser about the locations that the document can navigate to.
+
+navigate-to restricts the URLs which a document can navigate to by any mean (not yet supported by modern browsers in Jan 2021). -->
+
+     
+</head>
+<body>
+    <h1>Navigate To</h1>
+      <br>
+
+     
+      <form action="javascript:alert('Foo')" id="form1" method="post">
+        <input type="text" name="fieldName" value="fieldValue">
+        <input type="submit" id="submit" value="submit">
+      </form>
+    
+    <% if(csp=="" ) { %>
+        <a class="btn btn-primary" href="navigateto/dir/?dir=navigateto&csp=off" target="_blank">Withoutcsp</a>
+        <a class="btn btn-primary" href="navigateto/dir/?dir=navigateto&csp=on" target="_blank">Withcsp</a>
+        <% }  %>
+        <%= header %>
+        <%= csp %>
+                                       
+   
+        
+          
+             <%if(csp=="on") { %> 
+                <%- include("../partials/violationevent") %>
+                 <% } %> 
+
+</body>
+</html>

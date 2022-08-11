@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+    <iframe id="myframe" src="iframe/content.html"></iframe>
+
+    <p>Click the button to change the background color of the document contained in the iframe.</p>
+    
+    <p id="demo"></p>
+    
+    <button onclick="myFunction()">Try it</button>
+    
+    <script>
+    function myFunction() {
+      var x = document.getElementById("myframe");
+      //var y = x.contentWindow.document;
+      //y.body.style.backgroundColor = "red";
+      x.style.backgroundColor="green";
+     
+    }
+    </script>  
+</body>
+</html>

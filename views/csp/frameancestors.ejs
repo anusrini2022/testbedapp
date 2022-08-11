@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include("../partials/header") %>
+</head>
+<body>
+    <h1>Frame Ancestors</Frame></h1>
+    <%=csp %>
+    <%=msg %>
+    <% if(csp=="" ) { %>
+        <a class="btn btn-primary" href="frameancestors/dir/?dir=frameancestors&csp=off" target="_blank">Withoutcsp</a>
+        <a class="btn btn-primary" href="frameancestors/dir/?dir=frameancestors&csp=on" target="_blank">Withcsp</a>
+        <% } %>
+        <br>
+       
+        
+        
+        <iframe  width="600px" height="400px" src="/frame" style="border:none"></iframe>
+
+        
+        <%if(csp=="on") { %>
+            <%- include("../partials/violationevent") %>
+                    <% } %>
+
+    
+</body>
+</html>

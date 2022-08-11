@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessing webcamera</title>
+    <script src="https://unpkg.com/webcam-easy@1.0.5/dist/webcam-easy.min.js"></script>
+</head>
+<body>
+    <h1> Accessing webcamera From your browser</h1>
+    <video  id="Webcam"></video>
+    <canvas id="mycanvas"></canvas>
+</body>
+<script>
+    var webcamelemnt=document.getElementById("Webcam");
+    var canvaselemnt=document.getElementById("mycanvas");
+    const webcam=new Webcam(webcamelemnt,"users", canvaselemnt);
+    webcam.start();
+</script>
+<a href="/media/geolocation.html">Geolocation</a>
+<a href="/media/videoaudio.html">video&audio</a>
+</html>

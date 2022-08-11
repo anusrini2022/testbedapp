@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include("../partials/header") %>
+     <link rel="stylesheet" href="/css/cspstyle.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Style src</h1>
+    <% if(csp=="" ) { %>
+        <a class="btn btn-primary" href="stylesrc/dir/?dir=stylesrc&csp=off" target="_blank">Withoutcsp</a>
+        <a class="btn btn-primary" href="stylesrc/dir/?dir=stylesrc&csp=on" target="_blank">Withcsp</a>
+        <% } %>
+        
+            <%if(csp=="on") { %>
+                <%- include("../partials/violationevent") %>
+                <% } %>
+</body>
+</html>
