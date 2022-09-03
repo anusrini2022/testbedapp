@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clientxss</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+        <div>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">Client XSS Sinks</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+        <a href="/cxss/sources/somevalue?param1=paramvalue#hashvalue" class="btn btn-sm btn-outline-secondary" role="button">Previous</a>
+        <a href="/cxss/example" class="btn btn-sm btn-outline-secondary" role="button">Next</a>
+        </div>
+        </div>
+        </div>
+        <br>
+        <h2>Sinks that execute payload as JavaScript</h2>
+        <div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+        <input type="text" id="in_js_eval" class="form-control" value="alert(123)">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'js_eval')"><b>eval(</b><small> payload </small><b>)</b></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4"></div>
+        </div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+        <input type="text" class="form-control" id="in_js_st" value="alert(123)">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'js_st')"><b>setTimeout(</b><small> payload </small><b>, 100)</b></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4"></div>
+        </div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+        <input type="text" class="form-control" id="in_js_si" value="alert(123)">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'js_si')"><b>setInterval(</b><small> payload </small><b>, 100)</b></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4">
+        <div class="alert alert-warning" role="alert">
+        <span style="color: coral;">
+        <i class="fa fa-exclamation-triangle"></i>
+        </span>
+        Will execute continously.
+        </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+        <input type="text" class="form-control" id="in_js_fn" value="alert(123)">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'js_fn')"><b>Function(</b><small> payload </small><b>)()</b></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4"></div>
+        </div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+        <input type="text" class="form-control" id="in_js_script" value="alert(123)">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'js_script')"><b>&lt;script&gt;</b> <small> payload </small> <b>&lt;/script&gt;</b></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4">
+        <span id="out_js_script"></span>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+         </div>
+        <input type="text" class="form-control" id="in_js_onclick" value="alert(123)">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'js_onclick')"><b>&lt;div onclick ='</b><small> payload </small><b>'&gt;</b></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4">
+        <div id="out_js_onclick" class="alert alert-primary" role="alert" style="display:none;">
+        Click me to trigger execution of payload!!!
+        </div>
+        </div>
+        </div>
+        </div>
+        <br><br>
+        <h2>Sinks that evaluate JavaScript URIs</h2>
+        <div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+        <input type="text" class="form-control" id="in_jsu_loc" value="javascript:alert(123)">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'jsu_loc')"><b>location = </b><small> payload </small></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4"></div>
+        </div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+        <input type="text" class="form-control" id="in_jsu_loch" value="javascript:alert(123)">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'jsu_loch')"><b>location.href = </b><small> payload </small></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4"></div>
+        </div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+        <input type="text" class="form-control" id="in_jsu_loca" value="javascript:alert(123)">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'jsu_loca')"><b>location.assign(</b><small> payload </small><b>)</b></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4"></div>
+        </div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+        <input type="text" class="form-control" id="in_jsu_locr" value="javascript:alert(123)">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'jsu_locr')"><b>location.replace(</b><small> payload </small><b>)</b></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4"></div>
+        </div>
+        </div>
+        <br><br>
+        <h2>Sinks that execute payload as HTML</h2>
+        <div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+         <input type="text" class="form-control" id="in_html_ih" value="<img src=x onerror='alert(123)'/>">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'html_ih')"><b>HTMLElement.innerHTML = </b><small> payload </small></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4">
+        <span id="out_html_ih"></span>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+        <input type="text" class="form-control" id="in_html_oh" value="<img src=x onerror='alert(123)'/>">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'html_oh')"><b>HTMLElement.outerHTML = </b><small> payload </small></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4">
+        <span id="out_html_oh"></span>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+        <input type="text" class="form-control" id="in_html_dw" value="<img src=x onerror='alert(123)'/>">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'html_dw')"><b>document.write(</b><small> payload </small><b>)</b></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4">
+        <div class="alert alert-warning" role="alert">
+        <span style="color: coral;">
+        <i class="fa fa-exclamation-triangle"></i>
+        </span>
+        Will overwrite the current page.
+        </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-8">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Enter Payload</span>
+        </div>
+        <input type="text" class="form-control" id="in_html_dwl" value="<img src=x onerror='alert(123)'/>">
+        <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="execPayload(this, 'html_dwl')"><b>document.writeln(</b><small> payload </small><b>)</b></button>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4">
+        <div class="alert alert-warning" role="alert">
+        <span style="color: coral;">
+        <i class="fa fa-exclamation-triangle"></i>
+        </span>
+        Will overwrite the current page.
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <input type="text" id="in" value="123">
+      <button onclick="execute()"> eval</button>
+   
+        <script>
+            function execute()
+            {
+                var input=document.getElementById("in").value;
+                alert(eval(input));
+            }
+        
+            let execPayload = function (btn, id) {
+        
+                let getInputValue = function (id) {
+                    let ele = document.getElementById('in_' + id);
+                    return ele.value;
+                };
+                let getOutputElement = function (id) {
+                    let ele = document.getElementById('out_' + id);
+                    return ele;
+                };
+        
+                switch (id) {
+                    case "js_eval":
+                        eval(getInputValue(id));
+                        break;
+                    case "js_st":
+                        setTimeout(getInputValue(id), 100);
+                        break;
+                    case "js_si":
+                        setInterval(getInputValue(id), 100);
+                        break;
+                    case "js_fn":
+                        Function(getInputValue(id))();
+                        break;
+                    case "js_script":
+                        let scriptEle = document.createElement("script");
+                        scriptEle.textContent = getInputValue(id);
+                        getOutputElement(id).innerHTML = "";
+                        getOutputElement(id).appendChild(scriptEle);
+                        break;
+                    case "js_onclick":
+                        getOutputElement(id).setAttribute("onclick", getInputValue(id));
+                        getOutputElement(id).style.display = '';
+                        break;
+        
+                    case "jsu_loc":
+                        location = getInputValue(id);
+                        break;
+                    case "jsu_loch":
+                        location.href = getInputValue(id);
+                        break;
+                    case "jsu_loca":
+                        location.assign(getInputValue(id));
+                        break;
+                    case "jsu_locr":
+                        locat
+                        ion.replace(getInputValue(id));
+                        break;
+        
+                    case "html_ih":
+                        getOutputElement(id).innerHTML = getInputValue(id);
+                        break;
+                    case "html_oh":
+                        getOutputElement(id).outerHTML = getInputValue(id);
+                        break;
+                    case "html_dw":
+                        document.write(getInputValue(id));
+                        break;
+                    case "html_dwl":
+                        document.writeln(getInputValue(id));
+                        break;
+                }
+            };
+        
+        </script>
+        </div>
+        <hr />
+        <footer>
+        <p>&copy; 2022 - Ironwasp Security</p>
+        </footer>
+</body>
+</html>

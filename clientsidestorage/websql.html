@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>websql</title>
+</head>
+<body>
+    <h3>WebSQL</h3>
+    <div id="status"></div>
+    <p id="rec"></p>
+    <script>
+        
+        // var db=openDatabase("mydb","1.0","TESTDB",1024*1024);
+        // var msg="";
+       
+        //  db.transaction(function(trans){
+            
+        //     trans.executeSql('CREATE TABLE USERS(id unique ,name');
+        //     trans.executeSql('INSERT INTO USERS(id,name) VALUES(101,"Ram")');
+        //     trans.executeSql('INSERT INTO USERS(id,name) VALUES(102,"Sam")');
+        //     msg="<p>Table users created and rows inserted</p>"
+        //     document.querySelector("#status").innerHTML=msg;
+        //  });
+
+         var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+
+db.transaction(function (tx) { 
+   tx.executeSql('CREATE TABLE IF NOT EXISTS LOGS (id unique, log)');
+   tx.executeSql('INSERT INTO LOGS (id, log) VALUES (1, "foobar")'); 
+   tx.executeSql('INSERT INTO LOGS (id, log) VALUES (2, "logmsg")'); 
+});  
+
+db.transaction(function (tx) { 
+   tx.executeSql('SELECT * FROM LOGS', [], function (tx, results) { 
+      var len = results.rows.length, i; 
+      msg = "<p>Found rows: " + len + "</p>"; 
+      document.querySelector('#status').innerHTML +=  msg; 
+  
+      for (i = 0; i < len; i++) { 
+         alert(results.rows.item(i).log ); 
+         document.querySelector('#status').innerHTML +=  results.rows.item(i).id+"&nbsp;";
+         document.querySelector('#status').innerHTML +=  results.rows.item(i).log+"<br>";
+
+      } 
+  
+   }, null); 
+});
+
+     
+      db.transaction(function(trans){
+        console.log("Displaying Records");
+            trans.executeSql("SELECT * FROM users",[],function(trans,res){
+                console.log(res.rows);
+                console.log("Displaying Records");
+            });
+        });
+
+
+        
+    </script>
+</body>
+</html>

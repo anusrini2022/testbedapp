@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>websocket</title>
+</head>
+<body>
+    <h1>Submitting form using  Websocket</h1>
+    <h2>Enter your Details</h2>
+   
+    <form method="post" action="" id="myform">
+        Enter Your Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="uname"><br><br>
+        Enter Your Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" id="email"><br><br>
+        Enter your Password:&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="upwd"><br><br>
+        <button type="submit" id="submitform">submit</button>
+        <p id="usn"></p>
+    </form>
+    <script>
+         var form = document.getElementById("myform");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            var uname = document.getElementById("uname").value;
+            console.log(uname);
+            
+            var email = document.getElementById("email").value;
+            console.log(email);
+           
+        //connecting to  endpoint
+        const ws=new WebSocket("ws:localhost:8081");
+        //connection opened and submitting form data
+        ws.addEventListener("open",function(eve){
+        console.log("we are connected");
+        ws.send(JSON.stringify({uname:uname, email:email}));
+
+        });
+
+        //postingback data from the server
+        ws.addEventListener("message",function(eve){
+            console.log(eve.data);
+            document.getElementById("usn").innerHTML=`welcome ${eve.data}`;
+        })
+    });
+       
+    </script>
+</body>
+</html>

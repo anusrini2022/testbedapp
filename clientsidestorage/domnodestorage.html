@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>domnodestorage</title>
+</head>
+
+<body>
+    <h3>Domnodestorage</h3>
+    <h4>User Information</h4>
+    <p id="uid"></p>
+    <p id="uname"></p>
+    <p id="uage"></p>
+    <p id="ujob"></p>
+    <div id="user" data-user-id="1" data-user-name="Simha" data-user-age="43" data-user-job>
+        <p> Users </p>
+    </div>
+    <script>
+        const user = document.getElementById('user');
+        var id=document.getElementById("uid");
+        var name=document.getElementById("uname");
+        var age=document.getElementById("uage");
+        var job=document.getElementById("ujob");
+        console.log(user.dataset);
+       user.dataset.userJob="Admin";
+       console.log(user.dataset);
+       id.innerHTML=user.dataset.userId;
+       name.innerHTML=user.dataset.userName;
+       age.innerHTML=user.dataset.userAge;
+       job,innerHTML=user.dataset.userJob;
+
+    </script>
+
+</body>
+
+</html>

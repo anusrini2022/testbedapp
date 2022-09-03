@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fileentriesapi</title>
+</head>
+<body>
+    <h1>File and Directory Entries API</h1>
+    <button onclick="createFile()">createFile</button>
+    <button onclick="writeToFileEntry()">writeFile</button>
+   
+    <script>
+   window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;    
+   window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
+    function createFile()
+    {
+      
+        // Opening a file system with temporary storage
+window.requestFileSystem(TEMPORARY, 1024*1024 /*1MB*/, (fs) => {
+    
+  fs.root.getFile('log.txt', {create: true, exclusive: false}, (fileEntry) => {
+    console.log("creating file");
+    fileEntry.isFile==true;
+    fileEntry.name='log.txt';
+    fileEntry.fullPath='/log.txt';
+    console.log("File created");
+    fileEntry.getMetadata((md)=>{
+        console.log(md.modificationTime.toDateString());
+    });
+// Create a FileWriter object for our FileEntry.
+fileEntry.createWriter(function(fileWriter) {
+console.log("writing file");
+let text="new text";
+var bb= new Blob([text]);
+bb.append(text);
+//let data = Blob([text], { type: "text/plain" });
+
+//let data =  { type: "text/plain" });
+
+fileWriter.write(bb.getBlob("text/plain"));
+}, (fileError) => {
+/* do whatever to handle the error */
+console.log(error);
+});
+
+// fileWriter.onwrite = function(e) {
+//     console.log(e);
+//   console.log('Write completed.');
+// };
+
+// fileWriter.onerror = function(e) {
+//   console.log('Write failed: ' + e.toString());
+// };
+// });   
+
+  }); 
+});
+}
+
+ 
+    function writeToFileEntry(entry, text) {
+        console.log("writing files");
+  entry.createWriter((fileWriter) => {
+    let data = Blob([text], { type: "text/plain" });
+
+    fileWriter.write(data);
+  }, (fileError) => {
+    /* do whatever to handle the error */
+    console.log(error);
+  });
+}
+    
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Localstorage</title>
+    <style>
+        fieldset
+        {
+        padding:20px;
+        margin-bottom:20px;
+        width:600px;
+        }
+    </style>
+</head>
+<body>
+
+   <h3>localstorage</h3> 
+   <fieldset>
+    <legend>Insert Data</legend>
+    <input type="text" id="inpkey" placeholder="Enterkey">
+    <input type="text" id="inpval" placeholder="EnterValue">
+    <button  type="button" id="btn">Insert</button>
+   </fieldset>
+   <fieldset>
+    <legend>Localstorage</legend>
+    <div id="output">
+
+    </div>
+   </fieldset>
+   <script>
+  var inpkey=document.getElementById("inpkey");
+  var inpval=document.getElementById("inpval");
+  var btn=document.getElementById("btn");
+  var outputdiv=document.getElementById("output");
+
+  btn.addEventListener("click",function(){
+var key=inpkey.value;
+var val=inpval.value;
+console.log(key);
+console.log(val);
+
+if(key && val)
+{
+localStorage.setItem(key,val);
+console.log(localStorage);
+//location.reload();
+}
+  });
+for(var i=0;i<localStorage.length;i++)
+{
+    var key=localStorage.key(i);
+    console.log("key"+key);
+    var val=localStorage.getItem(key);
+    console.log("Value"+val);
+outputdiv.innerHTML+=`${key} ${val} <br/>`
+}
+
+
+  
+   
+
+
+
+    // localStorage.setItem("Name","harry");
+    // console.log(localStorage);
+    // var myname=localStorage.getItem("Name");
+    // document.write(myname);
+    // localStorage.removeItem("Name");
+    // console.log(localStorage);
+    // document.write(myname);
+   </script>
+   <a href="/storage/indexeddb">Indexeddb</a>
+   <a href="/storage/serviceworker">serviceworker</a>
+</body>
+</html>

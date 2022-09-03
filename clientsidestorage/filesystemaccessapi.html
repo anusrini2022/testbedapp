@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>filesystemaccessapi</title>
+</head>
+
+<body>
+    <h3>File System Access API</h3>
+    <p>Enter the content of the file</p>
+    <textarea id="cont" rows="4" cols="50">
+
+   </textarea>
+    <button onclick="saveFile()">savefile</button>
+    <script>
+        let filehandle;
+
+        async function saveFile() {
+            //get the value of textarea
+            var cont = document.getElementById("cont").value;
+            // create handle to a local file chosen by the user
+            filehandle = await window.showSaveFilePicker();
+            // create writable stream
+            let stream = await filehandle.createWritable();
+            // write the data 
+            await stream.write(cont);
+             // save and close the file
+            await stream.close();
+            alert("file saved");
+        }
+    </script>
+</body>
+
+</html>

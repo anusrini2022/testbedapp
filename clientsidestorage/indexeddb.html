@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indexeddb</title>
+</head>
+<body>
+    <h3>Indexeddb</h3>
+    <button type="button"  onclick="readData()">readData</button>
+    <button type="button"  onclick="addRecords()">addRecords</button>
+    <button type="button"  onclick="searchRecord()">searchRecord</button>
+    <button type="button"  onclick="deleteRecord()">deleteRecord</button>
+    
+    <p id="id"></p>
+    <p id="name"></p>
+   <p id="job"></p>
+   <p id="rec"></p>
+
+    <script>
+ const request=indexedDB.open("empdb",2);
+ var res;
+ 
+ var emp=[
+    {id:"101",name:"jhon", job:"developer"},
+    {id:"102",name:"Harry", job:"designer"}
+ ];
+
+ var records=[];
+ 
+//success
+  request.onsuccess=function(e){
+  //alert("success called");
+  res=request.result;
+  console.log("success:"+res);
+  }
+
+  //version upgradeneeded
+  request.onupgradeneeded=function(event){
+    var db=event.target.result;
+    var objectstore=db.createObjectStore("employees",{keyPath:"id"});
+    for(var i in emp)
+      objectstore.add(emp[i]);
+      console.log(objectstore);
+  }
+  //error
+  request.error=function(e){
+   console.log("Error");
+  }
+
+  function readData()
+  {
+    var id=document.getElementById("id");
+    var name=document.getElementById("name");
+    var job=document.getElementById("job");
+    var rec=document.getElementById("rec");
+    console.log("reading records");
+    var objectstore=res.transaction("employees").objectStore("employees");
+    objectstore.openCursor().onsuccess=function(event){
+        var cursor=event.target.result;
+        if(cursor){
+          //alert(cursor.key+cursor.value.name+cursor.value.job);
+          //document.write(cursor.value.name);
+          id.innerHTML+=cursor.key+"   "+cursor.value.name+ "   "+cursor.value.job +"<br>";
+          // name.innerHTML+=cursor.value.name;
+          // job.innerHTML+=cursor.value.job;
+        
+          console.log(cursor);
+          cursor.continue();
+          
+        }
+    }
+  }
+
+  
+  function addRecords()
+  {
+    var request=res.transaction(["employees"],"readwrite")
+    .objectStore("employees")
+    .add({id:"103",name:"Harry",job:"Admin"});
+    request.onsuccess=function(event){
+      alert("New Record added sucessfully");
+    };
+
+    request.onerror=function(event){
+     alert("Can not add Record");
+    };
+
+  }
+
+  function searchRecord()
+  {
+    var transaction=res.transaction(["employees"]);
+    var objectstore=transaction.objectStore("employees");
+    var request=objectstore.get("03");
+
+    request.onerror=function(event){
+      alert("Can not find this record") 
+    };
+
+    request.onsuccess=function(event){
+      if(request.result){
+        //alert(request.result.name+request.result.job);
+        rec.innerHTML=request.result.name+request.result.job
+
+      }
+      else
+        //alert("record does not exist in your table")
+        rec.innerHTML="record does not exist in your table";
+      
+    }
+
+  }
+
+  function deleteRecord()
+  {
+    var request=res.transaction(["employees"],"readwrite")
+    .objectStore("employees")
+    .delete("103");
+    request.onsuccess=function()
+    {
+      alert("Record deleted successfully");
+    }
+
+  }
+
+    </script>
+</body>
+</html>

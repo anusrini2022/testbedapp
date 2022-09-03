@@ -6,8 +6,32 @@ const res = require("express/lib/response");
 const axios=require("axios");
 const ejs=require("ejs");
 var path= require("path");
+const webSocket=require("ws");
+var router=express.Router();
 
+//session
+var session=require("express-session");
+var cookieParser=require("cookie-parser");
+
+
+//websocket Connections
+wss=new webSocket.Server({port:8081});
+wss.on("connection",function(ws){
+    console.log("new client connected");
+
+
+ws.on("message",function(data){
+ const res=JSON.parse(data);   
+console.log("Client sent us  data :"+res.uname+res.email);
+ws.send(res.uname);
+});
+});
+
+  
 //importing router modules
+var loginRouter=require("./routes/login");
+var logoutRouter=require("./routes/logout");
+var registrationRouter=require("./routes/register");
 var indexRouter=require("./routes/index");
 var iframeRouter=require("./routes/iframe");
 var inputRouter=require("./routes/input");
@@ -18,7 +42,30 @@ var scriptsrcRouter=require("./routes/csp/csp");
 var framedemoRouter=require("./routes/framedemo");
 var formRouter=require("./routes/form");
 var workersRouter=require("./routes/workers");
+var insecureddomRouter=require("./routes/insecureddom");
+var documentstyleRouter=require("./routes/documentstyle.js");
+var storageRouter=require("./routes/clientsidestorage.js");
+
 //var fontsrcRouter=require("./routes/csp/fontsrc");
+
+// creating 24 hours from milliseconds
+const oneDay = 1000 * 60 * 60 * 24;
+var sess;
+//session middleware
+app.use(session({
+    secret: "thisismysecrctekeyfuiuuuiiiu767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false
+}));
+
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use((req, res, next) => {
+    console.log('Time:', Date.now())
+    next()
+  })
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
@@ -29,7 +76,10 @@ app.use(bodyParser.json({type: ['application/json', 'application/csp-report']}))
 
 
 //indexpage routers
-app.use("/",indexRouter);
+app.use("/",loginRouter);
+app.use("/register",registrationRouter);
+app.use("/logout",logoutRouter);
+app.use("/index",indexRouter);
 app.use("/iframe",iframeRouter);
 app.use("/input",inputRouter);
 app.use("/csp",scriptsrcRouter)
@@ -39,7 +89,12 @@ app.use("/media",mediaRouter)
 app.use("/frame",framedemoRouter);
 app.use("/workers",workersRouter);
 app.use("/form",formRouter);
+app.use("/insecureddom",insecureddomRouter);
+app.use("/documentstyle",documentstyleRouter);
+app.use("/clientsidestorage",storageRouter);
 //app.use("/fontsrc",fontsrcRouter)
+
+
 
 
 

@@ -1,0 +1,1 @@
+document.write("Main js file");

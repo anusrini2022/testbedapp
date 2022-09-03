@@ -46,6 +46,11 @@ router.get("/jquery", function (req, res) {
 })
 
 
+//http://localhost:3001/form/websocket
+router.get("/websocket", function (req, res) {
+    res.sendFile(path.join(__dirname, "../form/websocket.html"));
+    //res.send("Input Page");
+})
 //http://localhost:3001/form/beacon
 router.get("/beacon", function (req, res) {
     res.sendFile(path.join(__dirname, "../form/submitformbeacon.html"));

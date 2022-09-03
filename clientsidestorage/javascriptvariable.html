@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascriptvariables</title>
+</head>
+<body>
+    <h3>javascriptvariables</h3>
+    <h4>Details of Employee</h4>
+    <p id="name"></p>
+    <p id="age"></p>
+    <p id="job"></p>
+    <p id="city"></p>
+    <p id="salary"></p>
+    <script>
+    var x=10;
+    var emp={
+    name:"Peter",
+    age:30,
+    job:"Developer",
+    city:"Chennai",
+    salary:50000
+    }
+    
+   document.getElementById("name").innerHTML="Name:"+emp.name;
+   document.getElementById("age").innerHTML= "Age:"+emp.age;
+   document.getElementById("job").innerHTML="Job:"+emp.job;
+   document.getElementById("city").innerHTML="City:"+emp.city;
+   document.getElementById("salary").innerHTML="Salary:"+emp.salary;
+    
+</script>
+</body>
+</html>

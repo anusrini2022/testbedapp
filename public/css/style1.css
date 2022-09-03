@@ -1,3 +1,7 @@
+body
+{
+    position:absolute;
+}
 #inputformtable,tr,th,td
 {
     border: 1px solid black;
@@ -13,4 +17,10 @@
 p
 {
     font-size:20px;
+}
+#logoutbtn
+{
+    position: absolute;
+    right:0;
+    top:0;
 }

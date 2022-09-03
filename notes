@@ -52,3 +52,36 @@ allow modals
 allow downloads with out user
 escape sandbox
 policyviolation
+
+
+todo
+=====
+serviceworker
+audioworklets
+
+
+client side storage
+====
+client side storage
+cache & serviceworker,
+session storage,
+indexedapi
+localstorage
+offline storage
+session
+cookies
+
+
+doubts
+
+serviceworker
+local storage input
+
+
+todo
+====
+import csp file
+import image background-image url external resources
+hireachy level
+storage pending
+documentation

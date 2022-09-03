@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cspnjonce</title>
+</head>
+<body>
+    <h3>nonce</h3>
+    <script></script>
+    <script>
+        var randomString=function(len){
+            var txt="";
+            var randtxt="shdfjgfjhfkgjkljkhjlkl234567890";
+            for(var i=0;i<len;i++){
+               txt+=randtxt.charAt(Math.floor(Math.random()*randtxt.length)); 
+            }
+           return txt; 
+        }
+
+        var rs=randomString(10);
+        console.log(rs);
+        document.write(rs);
+    </script>
+    
+</body>
+</html>

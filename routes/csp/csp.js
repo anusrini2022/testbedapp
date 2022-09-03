@@ -112,6 +112,7 @@ router.get("/fontsrc", function (req, res) {
   //res.send("fontsrcPage");
   var obj = { dir: "", csp: "",title:title, msg: "", header: "" ,title:title};
   var header = "";
+  var title="fontsrc";
   res.render("csp/fontsrc", obj)
 });
 
@@ -449,8 +450,12 @@ router.get("/frameancestors/dir", function (req, res) {
   });
 
 router.post("/userdet",function(req,res){
+
   res.send("posting data")
 })
+
+
+
   router.get("/sandbox", function (req, res) {
     var msg="sandbox";
     title="Sandboxhomepage";

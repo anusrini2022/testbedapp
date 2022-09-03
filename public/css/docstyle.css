@@ -1,0 +1,23 @@
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+p {
+    font-family: 'Poppins', sans-serif;
+   
+
+}
+body
+{
+    background-image:url("https://cdn.wallpapersafari.com/53/39/MOCg93.jpg");
+    opacity: 0.5px;
+}
+
+
+#exheading
+{
+ color:blue;
+}
+#expara
+{
+font-size:20px;
+}
+

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cacheapi</title>
+</head>
+<body>
+    <h3>CacheAPI</h3>
+    <p></p>
+    <button type="button" onclick="cacheFun()">createCache</button>
+    <button type="button" onclick="getcacheFun()">getCache</button>
+    <script>
+        //creating a cache
+        //var cache=mycache;
+        async function cacheFun(){
+            alert("caheStore");
+
+        const store=await cacheStore("/clientsidestorage/data");
+        console.log("cache stored");
+        }
+        async function cacheStore(url){
+            try{
+            const cache=await caches.open("newcache");
+            await cache.add(url);
+            //return true;
+            alert("cache created");
+            }
+            catch(err){
+                return undefined
+                alert("store failed")
+            }
+        }
+
+        async function getcacheFun()
+        {
+            alert("getCachefunction");
+            const res=await getCache("/clientsidestorage/data");
+            console.log(res);
+        }
+        async function getCache(url){
+
+        try{
+          cache= await caches.open("newcache"),
+            resp=await cache.match(url);
+            return await resp.text();
+        }
+        catch(err)
+        {
+            return undefined;
+            console.log(err);
+        }
+    }
+       
+    </script>
+</body>
+</html>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>inputform</title>
-  <link href="../css/style1.css" rel="stylesheet">
+  <link href="/css/style1.css" rel="stylesheet">
 </head>
 
 <body>
@@ -14,6 +14,7 @@
 
   <h1>inputfields</h1>
   <table id="inputformtable">
+
     <tr>
       <th>InputID</th>
       <th>Type</th>
@@ -24,19 +25,19 @@
       <!--After clicking the createInputs button  it will pass the value of current button it has clicked-->
       <td>inputformtext</td>
       <td><input type="text" id="inputformtext" class="inputs"></td>
-      <td>
-        <div id="newinput"></div>
-      </td>
+      <td> <div id="newinput"></div>  </td>
       <td id="text"><input type="button" id="btn" class="btn" onclick="createInputs(this)" value="AddInputs"></td>
-
-
+     
     </tr>
+
+    
     <tr>
       <td>inputformemail</td>
       <td><input type="email" id="inputformemail" class="inputs"></td>
-      <td id="newemail"></td>
+      <td id="newemail"></td> 
       <td id="email"><input type="button" id="btn1" class="btn" onclick="createInputs(this)" value="AddInputs"></td>
-    </tr>
+      </tr>
+
     <tr>
       <td>inputformpwd</td>
       <td><input type="password" id="inputformpwd"></td>
@@ -159,17 +160,18 @@
 
     </tr>
   </table>
-
-
+   
   <script>
+
+       
     function createInputs(btn) {
       var btn = btn;
-      //getting the parent node of button here its td and assigning the id to type variable
+      //getting the parent node of button here its td and assigning the id to variable name type
       var type = btn.parentNode.id;
       console.log(type);
-      //by using the previouSibling method  we can get the  previous td and append the new input
-      var td = document.getElementById(type).previousSibling;
-      // alert("td:"+td);
+      //by using the previouSibling method  we can get the  previous coloumn of the table and append the new input
+      var td = document.getElementById(type).previousElementSibling;
+      
 
 
       //getting the value of button
@@ -177,13 +179,14 @@
       //alert(btnvalue);
       var newinput = document.getElementById("newinput");
       //creating new input based on the type if btnvalue is addinputs it will append it in the previous coloumn of button
-      var input = document.createElement("INPUT");
+      var input = document.createElement("input");
       if (btnvalue == "AddInputs") {
         input.setAttribute("type", type);
         td.appendChild(input);
         //change the buttonvalue to removeinputs
         btn.value = "remvoveInputs";
         var btnvalue = btn.value;
+       
 
       }
       //if the  button value is remove inputs clear the inputs and again change the button value to addInputs
