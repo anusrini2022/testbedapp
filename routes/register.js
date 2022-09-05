@@ -24,9 +24,13 @@ res.render("index") ;
 
 else
 {
-    //res.send("Invalid Username");
+    
     res.redirect("/login");
 }
+
+}
+else{
+res.send("Invalid Username");
 }
 //res.send("indexpage");
 })

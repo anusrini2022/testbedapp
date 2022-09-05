@@ -59,11 +59,6 @@ app.use(session({
     resave: false
 }));
 
-// a middleware function with no mount path. This code is executed for every request to the router
-router.use((req, res, next) => {
-    console.log('Time:', Date.now())
-    next()
-  })
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -72,26 +67,35 @@ app.use(express.json());
 app.use(bodyParser.text());
 app.use(bodyParser.json({type: ['application/json', 'application/csp-report']}));
 
-
-
+//middleware used to redirect routes to login page
+const redirectLogin= function(req,res,next){
+    if(!req.session.userid) {
+    res.redirect("/");
+     }
+  else{
+    console.log(req.session.userid);
+      next();
+  }
+  
+  }
 
 //indexpage routers
 app.use("/",loginRouter);
 app.use("/register",registrationRouter);
-app.use("/logout",logoutRouter);
-app.use("/index",indexRouter);
-app.use("/iframe",iframeRouter);
+app.use("/logout",redirectLogin,logoutRouter);
+app.use("/index",redirectLogin ,indexRouter);
+app.use("/iframe",redirectLogin,iframeRouter);
 app.use("/input",inputRouter);
-app.use("/csp",scriptsrcRouter)
-app.use("/javascript",javascriptRouter)
-app.use("/keyboard",keyboardRouter)
-app.use("/media",mediaRouter)
-app.use("/frame",framedemoRouter);
-app.use("/workers",workersRouter);
-app.use("/form",formRouter);
-app.use("/insecureddom",insecureddomRouter);
-app.use("/documentstyle",documentstyleRouter);
-app.use("/clientsidestorage",storageRouter);
+app.use("/csp",redirectLogin ,scriptsrcRouter)
+app.use("/javascript",redirectLogin,javascriptRouter)
+app.use("/keyboard",redirectLogin,keyboardRouter)
+app.use("/media",redirectLogin,mediaRouter)
+app.use("/frame",redirectLogin,framedemoRouter);
+app.use("/workers",redirectLogin,workersRouter);
+app.use("/form",redirectLogin,formRouter);
+app.use("/insecureddom",redirectLogin,insecureddomRouter);
+app.use("/documentstyle",redirectLogin,documentstyleRouter);
+app.use("/clientsidestorage",redirectLogin,storageRouter);
 //app.use("/fontsrc",fontsrcRouter)
 
 
@@ -272,3 +276,4 @@ bodyParser.urlencoded({ extended: false });
     console.log("App started Listening ");
  })
 module.exports=app;
+//module.exports= {redirectLogin:redirectLogin};
