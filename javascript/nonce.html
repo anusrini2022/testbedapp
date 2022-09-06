@@ -8,21 +8,11 @@
 </head>
 <body>
     <h3>nonce</h3>
-    <script></script>
-    <script>
-        var randomString=function(len){
-            var txt="";
-            var randtxt="shdfjgfjhfkgjkljkhjlkl234567890";
-            for(var i=0;i<len;i++){
-               txt+=randtxt.charAt(Math.floor(Math.random()*randtxt.length)); 
-            }
-           return txt; 
-        }
-
-        var rs=randomString(10);
-        console.log(rs);
-        document.write(rs);
-    </script>
     
+    
+    <script nonce="qwtewtwe123444">
+        document.write("nonce created")
+   </script>
+  
 </body>
 </html>

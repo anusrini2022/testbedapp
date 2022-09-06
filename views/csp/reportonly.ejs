@@ -1,64 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportonly</title>
-    <%- include("../partials/header") %>
-</head>
-<body>
-    <h1>Form Action</h1>
-      <br>
-    <% if(csp=="" ) { %>
-        <a class="btn btn-primary" href="reportonly/dir/?dir=reportonly&csp=off" target="_blank">Withoutcsp</a>
-        <a class="btn btn-primary" href="reportonly/dir/?dir=reportonly&csp=on" target="_blank">Withcsp</a>
-        <% } else{ %>
-        <%= header %>
-        <%= csp %>
-       
 
-        <form action="javascript:alert(1)" id="form1" method="post">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reportonly</title>
+  <%- include("../partials/header") %>
+</head>
+
+<body>
+  <h1>Form Action</h1>
+  <br>
+  <% if(csp=="" ) { %>
+    <a class="btn btn-primary" href="reportonly/dir/?dir=reportonly&csp=off" target="_blank">Withoutcsp</a>
+    <a class="btn btn-primary" href="reportonly/dir/?dir=reportonly&csp=on" target="_blank">Withcsp</a>
+    <% } else{ %>
+      <%= header %>
+        <%= csp %>
+
+
+          <form action="javascript:alert(1)" id="form1" method="post">
             <input type="text" name="fieldName" value="fieldValue">
             <input type="submit" id="submit" value="submit">
           </form>
           <% } %>
-         
-             <%if(csp=="on") { %> 
-             
-              
-              <script> 
-                if ('SecurityPolicyViolationEvent' in window) { // Check browser support of SecurityPolicyViolationEnevt interface
-                console.log("Security Policy event Supported");
-                window.addEventListener('securitypolicyviolation', function (e) { // Add SecurityPolicyViolation enevt handler
-                    console.log("policy"+{ violatedDirective: e.violatedDirective, originalPolicy: e.originalPolicy });
-                    document.getElementById("policy").value= e.originalPolicy ;
-                    document.getElementById("documenturi").value= e.documentURI;
-                    document.getElementById("referrer").value= e.referrer;
-                    document.getElementById("blockeduri").value= e.blockedURI;
-                    document.getElementById("violdir").value= e.violatedDirective;
-                    document.getElementById("effdir").value= e.effectiveDirective;
-                    document.getElementById("dispos").value= e.disposition;
-                    document.getElementById("status").value= e.statusCode;
-                    
 
-                }); 
+            <%if(csp=="on") { %>
+
+
+              <script>
+                if ('SecurityPolicyViolationEvent' in window) { // Check browser support of SecurityPolicyViolationEnevt interface
+                  console.log("Security Policy event Supported");
+                  window.addEventListener('securitypolicyviolation', function (e) { // Add SecurityPolicyViolation enevt handler
+
+                  });
                 }
                 else
-                consoloe.log("Security Policy event  not Supported");
-                </script>
-                <form action="/csp/reporturi" id="form2" method="post">
-                 <p> <input type="text" id="policy" name="policy" value=""></p>
-                 <p> <input type="text" id="documenturi" name="documenturi" value=""></p>
-                 <p> <input type="text" id="referrer" name="referrer" value=""></p>
-                 <p> <input type="text" id="blockeduri" name="blockeduri" value=""></p>
-                 <p> <input type="text" id="violdir" name="violdir" value=""></p>
-                 <p> <input type="text" id="effdir" name="violdir" value=""></p>
-                 <p> <input type="text" id="dispos" name="dispos" value=""></p>
-                 <p> <input type="text" id="status" name="status" value=""></p>
-                  <p><input type="submit" id="submitform" value="submit"></p>
-                 
-                </form>
-                 <% } %> 
+                  consoloe.log("Security Policy event  not Supported");
+              </script>
+
+              <% } %>
+                <%if(csp=="on") { %>
+                  <%- include("../partials/violationevent") %>
+                    <% } %>
 </body>
+
 </html>

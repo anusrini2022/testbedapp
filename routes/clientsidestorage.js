@@ -50,14 +50,7 @@ router.get("/window-name",function(req,res){
 
 });
 
-router.get("/window-open",function(req,res){
-   res.sendFile(path.join(__dirname,"../clientsidestorage/window-open.html"));
 
-});
-router.get("/childwindow",function(req,res){
-   res.sendFile(path.join(__dirname,"../clientsidestorage/childwindow.html"));
-
-});
 router.get("/filesystemaccessapi",function(req,res){
    res.sendFile(path.join(__dirname,"../clientsidestorage/filesystemaccessapi.html"));
 

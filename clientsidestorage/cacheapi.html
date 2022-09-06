@@ -11,12 +11,14 @@
     <p></p>
     <button type="button" onclick="cacheFun()">createCache</button>
     <button type="button" onclick="getcacheFun()">getCache</button>
+    <p id="cache"></p>
+    <p id="res"></p>
     <script>
         //creating a cache
         //var cache=mycache;
         async function cacheFun(){
-            alert("caheStore");
-
+            console.log("caheStore");
+        //passing the url which contains data.json file
         const store=await cacheStore("/clientsidestorage/data");
         console.log("cache stored");
         }
@@ -25,19 +27,20 @@
             const cache=await caches.open("newcache");
             await cache.add(url);
             //return true;
-            alert("cache created");
+            console.log("cache created");
+            document.getElementById("cache").innerHTML="cache created";
             }
             catch(err){
                 return undefined
-                alert("store failed")
+                console.log("store failed")
             }
         }
 
         async function getcacheFun()
         {
-            alert("getCachefunction");
             const res=await getCache("/clientsidestorage/data");
             console.log(res);
+            document.getElementById("res").innerHTML=res;
         }
         async function getCache(url){
 

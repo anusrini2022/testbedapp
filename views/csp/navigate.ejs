@@ -7,23 +7,22 @@
    
     <%- include("../partials/header") %>
   
-     <!-- <title>Document</title>
-     Navigation directives instruct the browser about the locations that the document can navigate to.
-
-navigate-to restricts the URLs which a document can navigate to by any mean (not yet supported by modern browsers in Jan 2021). -->
+     <title>navigateto</title>
 
      
 </head>
 <body>
     <h1>Navigate To</h1>
       <br>
-
+      <h6> Navigation directives instruct the browser about the locations that the document can navigate to.
+        navigate-to restricts the URLs which a document can navigate to by any mean (not yet supported by modern browsers in Jan 2021).
+      </h6>
      
       <form action="javascript:alert('Foo')" id="form1" method="post">
-        <input type="text" name="fieldName" value="fieldValue">
-        <input type="submit" id="submit" value="submit">
+        <input type="text" name="fieldName" value="fieldValue"><br><br>
+        <button type="submit" class="btn-btn-primary" id="submit">submit</button>
       </form>
-    
+    <br>
     <% if(csp=="" ) { %>
         <a class="btn btn-primary" href="navigateto/dir/?dir=navigateto&csp=off" target="_blank">Withoutcsp</a>
         <a class="btn btn-primary" href="navigateto/dir/?dir=navigateto&csp=on" target="_blank">Withcsp</a>

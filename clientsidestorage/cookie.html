@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cookies</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cookies</title>
 </head>
+
 <body>
-   <h3>Cookies</h3> 
-   <p>Enter username</p>
-   <input type="text" id="cookieval" required>
-   <button onclick="setCookies()">Set cookies</button>
-   <button onclick="showCookies()">Show cookies</button>
+  <h3>Cookies</h3>
+  <p>Enter username</p>
+  <input type="text" id="cookieval" required>
+  <button onclick="setCookies()">Set cookies</button>
+  <button onclick="showCookies()">Show cookies</button>
 
-<button onclick="clearOutputCookies()">Clear</button>  
+  <button onclick="clearOutputCookies()">Clear</button>
   <p id="setcookie"></p>
-</button>
+  </button>
 
-<div>
-  <code id="cookies"></code>
-</div>
-   <script>
-    
+  <div>
+    <code id="cookies"></code>
+  </div>
+  <script>
+
     function setCookies() {
-     var uname=document.getElementById("cookieval").value;
-    alert(uname);
-    document.cookie = "name="+uname;
-    document.cookie = "city=Bangalore";
-    document.getElementById("setcookie").innerHTML="Cookies Set"
+      var uname = document.getElementById("cookieval").value;
+      document.cookie = "name=" + uname;
+      document.cookie = "city=Bangalore";
+      document.getElementById("setcookie").innerHTML = "Cookies Set"
     }
-    function showCookies(){
-  const output = document.getElementById('cookies')
-  output.textContent = `> ${document.cookie}`
-}
+    function showCookies() {
+      const output = document.getElementById('cookies')
+      output.textContent = `> ${document.cookie}`
+    }
 
-function clearOutputCookies() {
- 
-  const output = document.getElementById('cookies')
-  output.textContent = ''
-}
-   </script>
+    function clearOutputCookies() {
+
+      const output = document.getElementById('cookies')
+      output.textContent = ''
+    }
+  </script>
 </body>
+
 </html>

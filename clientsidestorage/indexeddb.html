@@ -8,11 +8,15 @@
 </head>
 <body>
     <h3>Indexeddb</h3>
-    <button type="button"  onclick="readData()">readData</button>
+    Id:<input type="text"  id="newid"value="">
+   Name :<input type="text" id="newname" value="">
+  Job:<input type="text"  id="newcity"value=""><br>
+   
     <button type="button"  onclick="addRecords()">addRecords</button>
+    <button type="button"  onclick="readData()">readData</button>
     <button type="button"  onclick="searchRecord()">searchRecord</button>
     <button type="button"  onclick="deleteRecord()">deleteRecord</button>
-    
+    <p id="msg"></p>
     <p id="id"></p>
     <p id="name"></p>
    <p id="job"></p>
@@ -55,6 +59,8 @@
     var name=document.getElementById("name");
     var job=document.getElementById("job");
     var rec=document.getElementById("rec");
+
+   
     console.log("reading records");
     var objectstore=res.transaction("employees").objectStore("employees");
     objectstore.openCursor().onsuccess=function(event){
@@ -76,24 +82,52 @@
   
   function addRecords()
   {
-    var request=res.transaction(["employees"],"readwrite")
-    .objectStore("employees")
-    .add({id:"103",name:"Harry",job:"Admin"});
+    var newid=document.getElementById("newid").value;
+    var newname=document.getElementById("newname").value;
+    var newjob=document.getElementById("newjob").value;
+    var msg=document.getElementById("msg");
+  //  alert(newid);
+  //   var transaction=res.transaction(["employees"]);
+  //   var objectstore=transaction.objectStore("employees");
+    
+  //  var  request=objectstore.get(newid)
+  //  request.onerror=function(err){
+  //   console.log("Error")
+  //  }
+  //  request.onsuccess=function(event){
+  //     if(request.result){
+    
+    
+  //     console.log(request.result.id);
+  //     console.log("Record already exists")
+  //     msg.innerHTML="Record already exists";
+  //   }
+  //   else
+  //   {
+     //rec.innerHTML="record does not exist in your table";
+      var req=res.transaction(["employees"],"readwrite")
+    .objectStore("employees");
+    req.add({id:newid,name:newname,job:newcity});
+
     request.onsuccess=function(event){
       alert("New Record added sucessfully");
+      msg.innerHTML="New Record added sucessfully";
     };
 
     request.onerror=function(event){
      alert("Can not add Record");
+     msh.innerHTML="Can not add Record";
     };
-
-  }
-
+  
+}
+  
+  
+  
   function searchRecord()
   {
     var transaction=res.transaction(["employees"]);
     var objectstore=transaction.objectStore("employees");
-    var request=objectstore.get("03");
+    var request=objectstore.get("103");
 
     request.onerror=function(event){
       alert("Can not find this record") 

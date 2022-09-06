@@ -64,4 +64,13 @@ router.get("/fetchapi", function (req, res) {
     //res.send("Input Page");
 })
 
+router.get("/window-open",function(req,res){
+    res.sendFile(path.join(__dirname,"../form/window-open.html"));
+ 
+ });
+ router.get("/childwindow",function(req,res){
+    res.sendFile(path.join(__dirname,"../form/childwindow.html"));
+ 
+ });
+
 module.exports = router;

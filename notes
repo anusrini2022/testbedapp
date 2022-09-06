@@ -85,3 +85,21 @@ import image background-image url external resources
 hireachy level
 storage pending
 documentation
+
+
+todo
+
+=====
+1/title
+console.log in server side
+unnecessary comments
+alerts
+update documentation
+all concepts with sub heading
+username:lava
+password 32charac
+middleware:reidirect("/")
+move window.open in communications folder
+console.log update in documentation
+
+

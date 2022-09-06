@@ -15,7 +15,7 @@ document.head.append(script);
 
 //passing the value of src as secondfile.js
 function externalScriptLoad(){
-scriptLoad("/javascript/secondfile.js");
+scriptLoad("/js/secondfile.js");
 }
 
 //loading extenal file like bootstrap and jquery

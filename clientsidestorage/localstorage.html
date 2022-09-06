@@ -45,16 +45,16 @@ if(key && val)
 {
 localStorage.setItem(key,val);
 console.log(localStorage);
-//location.reload();
+location.reload();
 }
   });
 for(var i=0;i<localStorage.length;i++)
 {
     var key=localStorage.key(i);
-    console.log("key"+key);
+    console.log("key:"+key);
     var val=localStorage.getItem(key);
-    console.log("Value"+val);
-outputdiv.innerHTML+=`${key} ${val} <br/>`
+    console.log("Value:"+val);
+outputdiv.innerHTML+="key:"+key+"<br>"+"Value:"+val+"<br>";
 }
 
 
