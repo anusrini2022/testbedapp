@@ -19,7 +19,7 @@
         <button type="submit">submit</button>
 
     </form>
-    <a href="/">home</a>
+    <a href="/form">back</a>
     <script>
         
         $(document).ready(function(){
@@ -27,16 +27,13 @@
             {eve.preventDefault();
             var uname=$("#uname").val();
             var email=$("#email").val();
-            alert(uname);
-            alert(email);
-               $.post("/form/userdet",{
+            $.post("/form/userdet",{
                    uname:uname,
                    email:email
                },
                function(data,status)
                {
-                   alert("data:"+JSON.stringify(data)+"status:"+status);
-                   $("#status").html("Status:"+status);
+                $("#status").html("Status:"+status);
                    $("#res").html("Data:"+JSON.stringify(data));
                });
             }

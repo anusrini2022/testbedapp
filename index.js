@@ -8,6 +8,11 @@ const ejs = require("ejs");
 var path = require("path");
 const webSocket = require("ws");
 var router = express.Router();
+var https=require("https");
+var http=require("http");
+var fs=require("fs");
+
+
 
 //session
 var session = require("express-session");
@@ -17,12 +22,9 @@ var cookieParser = require("cookie-parser");
 //websocket Connections
 wss = new webSocket.Server({ port: 8081 });
 wss.on("connection", function (ws) {
-  console.log("new client connected");
-
 
   ws.on("message", function (data) {
     const res = JSON.parse(data);
-    console.log("Client sent us  data :" + res.uname + res.email);
     ws.send(res.uname);
   });
 });
@@ -31,7 +33,6 @@ wss.on("connection", function (ws) {
 //importing router modules
 var loginRouter = require("./routes/login");
 var logoutRouter = require("./routes/logout");
-var registrationRouter = require("./routes/register");
 var indexRouter = require("./routes/index");
 var iframeRouter = require("./routes/iframe");
 var inputRouter = require("./routes/input");
@@ -45,6 +46,23 @@ var workersRouter = require("./routes/workers");
 var insecureddomRouter = require("./routes/insecureddom");
 var documentstyleRouter = require("./routes/documentstyle.js");
 var storageRouter = require("./routes/clientsidestorage.js");
+
+
+//create Https listener port at 8080
+// Provide the private and public key to the server by reading each
+		// file's content with the readFileSync() method.
+https.createServer({
+  key: fs.readFileSync("key.pem"),
+  cert: fs.readFileSync("cert.pem"),
+},app).listen(8080,()=>{
+  console.log("Https Server is Running at Port:8080");
+})
+
+//Http server listening at 3001
+http.createServer(app)
+ .listen(3001, function (req, res) {
+   console.log("Http server started Listening  at port:3001");
+})
 
 // creating 24 hours from milliseconds
 const oneDay = 1000 * 60 * 60 * 24;
@@ -135,8 +153,5 @@ app.set("view engine", "ejs");
 
 bodyParser.urlencoded({ extended: false });
 
-//
-app.listen(3001, function (req, res) {
-  console.log("App started Listening ");
-})
+
 module.exports = app;

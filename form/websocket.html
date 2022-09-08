@@ -22,27 +22,23 @@
         form.addEventListener("submit", function (event) {
             event.preventDefault();
             var uname = document.getElementById("uname").value;
-            console.log(uname);
-            
             var email = document.getElementById("email").value;
-            console.log(email);
-           
         //connecting to  endpoint
         const ws=new WebSocket("ws:localhost:8081");
         //connection opened and submitting form data
         ws.addEventListener("open",function(eve){
-        console.log("we are connected");
         ws.send(JSON.stringify({uname:uname, email:email}));
 
         });
 
+
         //postingback data from the server
         ws.addEventListener("message",function(eve){
-            console.log(eve.data);
-            document.getElementById("usn").innerHTML=`welcome ${eve.data}`;
+         document.getElementById("usn").innerHTML=`welcome ${eve.data}`;
         })
     });
        
     </script>
+    <a href="/form">back</a>
 </body>
 </html>

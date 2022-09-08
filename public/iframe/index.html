@@ -30,8 +30,7 @@
     <p>Click the contentWindow button to open an iframe and click the changeBackground or ChangeContent button to change
         the background or content</p>
     <button onclick="contentWindow()">contentWindow </button>
-    <button onclick="changeBackground()">ChangeBackground </button>
-    <button onclick="changeContent()">ChangeContent </button>
+    
     <p id="demo"></p>
 
     <script>
@@ -52,7 +51,7 @@
             x.setAttribute("srcdoc", "<h2>New Iframe </h2>");
             document.body.appendChild(x);
             var srcdoc = document.getElementById("myframe").srcdoc;
-            document.getElementById("demo").innerHTML = "SourceDocument  of the Frame:" + srcdoc;
+            document.getElementById("demo").innerHTML =  srcdoc;
         }
 
 
@@ -96,7 +95,7 @@
             var x = document.createElement("IFRAME");
             x.setAttribute("src", "topnav.html");
             x.setAttribute("id", "myframe");
-            x.setAttribute("sandbox", "allow-same-orgin allow-top-navigation");
+            x.setAttribute("sandbox", "allow-same-origin allow-top-navigation");
             document.body.appendChild(x);
             var sandbox = document.getElementById("myframe").sandbox;
             document.getElementById("demo").innerHTML = "Sandbox of the Frame:" + sandbox;
@@ -128,21 +127,14 @@
             x.setAttribute("src", "content.html");
             x.setAttribute("id", "myframe");
 
-
             document.body.appendChild(x);
             document.body.appendChild(btn);
             document.body.appendChild(btn1);
             var val = document.getElementById("myframe");
             var val1 = val.contentWindow;
             var iframedoc = val.contentDocument;
-            console.log(val1);
-            console.log(iframedoc);
             btn.setAttribute("onclick", "changeBackground()");
             btn1.setAttribute("onclick", "changeContent()");
-            //val1.body.style.backgroundColor="red"
-
-
-
         }
 
         function changeBackground() {

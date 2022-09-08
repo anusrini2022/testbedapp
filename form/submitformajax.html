@@ -20,26 +20,19 @@
         Enter your Password:&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="upwd" id="pwd"><br><br>
         <p id="Name">UserDetails:</p>
         <button type="submit">submit</button>
-       
+
     </form>
     <script>
         var myform = document.getElementById("myform");
         myform.addEventListener("submit", function (event) {
             event.preventDefault();
             var uname = document.getElementById("uname").value;
-            console.log(uname);
             var email = document.getElementById("email").value;
-            console.log(email);
             var pwd = document.getElementById("pwd").value;
-            console.log(pwd);
             var xhttp = new XMLHttpRequest();
-            console.log(xhttp);
-
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("Name").innerHTML += this.responseText;
-                    console.log(this.responseText);
-
 
                 }
             };
@@ -51,7 +44,7 @@
         })
 
     </script>
-    <a href="/">home</a>
+    <a href="/form">back</a>
 </body>
 
 </html>

@@ -35,9 +35,6 @@ console.log("writing file");
 let text="new text";
 var bb= new Blob([text]);
 bb.append(text);
-//let data = Blob([text], { type: "text/plain" });
-
-//let data =  { type: "text/plain" });
 
 fileWriter.write(bb.getBlob("text/plain"));
 }, (fileError) => {
@@ -45,10 +42,6 @@ fileWriter.write(bb.getBlob("text/plain"));
 console.log(error);
 });
 
-// fileWriter.onwrite = function(e) {
-//     console.log(e);
-//   console.log('Write completed.');
-// };
 
 // fileWriter.onerror = function(e) {
 //   console.log('Write failed: ' + e.toString());

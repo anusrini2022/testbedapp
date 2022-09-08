@@ -9,8 +9,7 @@ router.get("/", function (req, res) {
 })
 
 router.get("/api", function(req,res){
-    console.log("posting data");
-//res.json({"status":"Success"});
+   
 });
 
 router.post("/api", function(req,res){
@@ -18,10 +17,8 @@ router.post("/api", function(req,res){
     });
 //http://localhost:3001/form/userdet
 router.post("/userdet", function (req, res) {
-    //res.send(`<h3>Welcome ${req.body['uname']}</h3>`);
     res.json({uname:req.body["uname"]});
-    console.log("posting data");
-    console.log(req.body);
+   
 
 })
 
@@ -41,15 +38,14 @@ router.get("/axios", function (req, res) {
 
 //http://localhost:3001/form/jquery
 router.get("/jquery", function (req, res) {
-    res.sendFile(path.join(__dirname, "../form/jquerysubmitform.html"));
-    //res.send("Input Page");
+   
 })
 
 
 //http://localhost:3001/form/websocket
 router.get("/websocket", function (req, res) {
     res.sendFile(path.join(__dirname, "../form/websocket.html"));
-    //res.send("Input Page");
+    
 })
 //http://localhost:3001/form/beacon
 router.get("/beacon", function (req, res) {

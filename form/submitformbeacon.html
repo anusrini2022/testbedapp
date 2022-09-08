@@ -26,24 +26,12 @@
 let url = '/form/userdet';
 var uname=document.getElementById("uname").value;
 var email=document.getElementById("email").value;
-console.log(uname);
-console.log(email);
 // Create a new FormData and add a key/value pair
 let data = {"uname":uname,"email":email}
-
 let result = navigator.sendBeacon(url,JSON.stringify(data));
 document.getElementById("res").innerHTML+=JSON.stringify(data);
-
-
-if (result) { 
-  console.log('Successfully queued!');
-  console.log(result);
-} else {
-  console.log('Failure.');
-}
 })
-
 </script>
-<a href="/">home</a>
+<a href="/form">back</a>
 </body>
 </html>
