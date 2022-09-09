@@ -11,9 +11,10 @@
     <h1>Media src</h1>
     <video width="300px" height="300px" controls>
     <source src="/media/sample-mp4-file-small.mp4"  type="video/mp4">
-
+   
     Your browser does not support video
     </video>
+    <br><br>
     <% if(csp=="" ) { %>
         <a class="btn btn-primary" href="mediasrc/dir/?dir=mediasrc&csp=off" target="_blank">Withoutcsp</a>
         <a class="btn btn-primary" href="mediasrc/dir/?dir=mediasrc&csp=on" target="_blank">Withcsp</a>

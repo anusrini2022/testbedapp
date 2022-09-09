@@ -21,8 +21,9 @@
             <!-- webworkers -->
 
             <p>Count numbers: <output id="result"></output></p>
-            <button onclick="startWorker()">Start Worker</button>
-            <button onclick="stopWorker()">Stop Worker</button>
+            <button  class="btn btn-primary"onclick="startWorker()">Start Worker</button>
+            <button   class="btn btn-primary"onclick="stopWorker()">Stop Worker</button>
+            <br><br>
             <% if(csp=="" ) { %>
                 <a class="btn btn-primary" href="workersrc/dir/?dir=workersrc&csp=off" target="_blank">Withoutcsp</a>
                 <a class="btn btn-primary" href="workersrc/dir/?dir=workersrc&csp=on" target="_blank">Withcsp</a>

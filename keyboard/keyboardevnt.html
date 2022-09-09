@@ -32,35 +32,24 @@
         keypressinput = document.getElementById("inputkeypress");
         keypressinput.addEventListener("keypress", keypressFunction)
         function keydownfunction(event) {
-            console.log("KeydownEvent");
             
-            //console.log(event);
             var ele=event.srcElement;
-            //alert(ele);
-            //console.log("SourceElement:" +event.srcElement);
-            //console.log("Key Pressed:" + event.key);
+            
             var  keydown=[{"Eventname":event.type,"SourceElement":event.target.tagName,"keypressed": event.key}];
             events.push(keydown);
-            console.log(events);
             document.getElementById("keydown").innerHTML=JSON.stringify(events);
            
         }
 
         function keyupFunction(event) {
-            //console.log("KeyupEvent");
-            //console.log("Key Pressed:" + event.key);
             var keyup=[{"Eventname":event.type,"keypressed": event.key}];
             events.push(keyup);
-            console.log(events);
             document.getElementById("keyup").innerHTML=JSON.stringify(events);
         }
 
         function keypressFunction(event) {
-            //console.log("KeypressEvent");
-            //console.log("Key Pressed:" + event.key);
             var keypress=[{"Eventname":event.type,"keypressed": event.key}];
             events.push(keypress);
-            console.log(events);
             document.getElementById("keypress").innerHTML=JSON.stringify(events);
 
         }

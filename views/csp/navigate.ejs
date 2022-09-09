@@ -14,11 +14,11 @@
 <body>
     <h1>Navigate To</h1>
       <br>
-      <h6> Navigation directives instruct the browser about the locations that the document can navigate to.
-        navigate-to restricts the URLs which a document can navigate to by any mean (not yet supported by modern browsers in Jan 2021).
+      <h6> Navigation directives instruct the browser about the locations that the document can navigate to.</h6>
+       <h6> navigate-to restricts the URLs which a document can navigate to by any mean (not yet supported by modern browsers in Jan 2021).
       </h6>
      
-      <form action="javascript:alert('Foo')" id="form1" method="post">
+      <form action="javascript:document.write('submitting Form Values')" id="form1" method="post">
         <input type="text" name="fieldName" value="fieldValue"><br><br>
         <button type="submit" class="btn-btn-primary" id="submit">submit</button>
       </form>
@@ -29,10 +29,7 @@
         <% }  %>
         <%= header %>
         <%= csp %>
-                                       
    
-        
-          
              <%if(csp=="on") { %> 
                 <%- include("../partials/violationevent") %>
                  <% } %> 

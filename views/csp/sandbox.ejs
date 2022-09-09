@@ -104,27 +104,33 @@
 <br><br>
 <a class="btn btn-primary" href="/csp/sandbox">Back</a>
  <% } %>
- <% if(dir=="sameorgindir" || dir=="sandboxsameorgindir" ){%><%=header %>
+ <% if(dir=="sameorgindir" || dir=="sandboxsameorgindir" ){%>
+  <%=header %>
  <br>
+ <!--path:c:/testbed/public/iframe/sourcefile.html-->
 <iframe src="/iframe/sourcefile.html" sandbox></iframe>
 <br>
 <a class="btn btn-primary" href="/csp/sandbox">Back</a>
  <% } %>
 <% if(dir=="allowformdir" || dir=="sandboxallowformdir" ){%>
- <%=header %>
+  <%=header %>
+  <br>
+<iframe src="/iframe/submitform.html" height="200px" width="300px"></iframe>
 <br>
-<iframe src="/iframe/submitform.html"></iframe>
 <br><br>
  <a class="btn btn-primary" href="/csp/sandbox">Back</a>
  <% } %>
  <% if(dir=="topnavdir" || dir=="sandboxtopnavdir" ){%>
 <%=header %>
+<br>
 <iframe src="/iframe/topnav.html"></iframe>
 <br><br>
 <a class="btn btn-primary" href="/csp/sandbox">Back</a>
 <% } %>
 <% if(dir=="popupdir" || dir=="sandboxpopupdir" ){%>
- <%=header %> <iframe src="/iframe/popup.html"></iframe>
+ <%=header %>
+ <br>
+  <iframe src="/iframe/popup.html"></iframe>
 <br><br>
 <a class="btn btn-primary"href="/csp/sandbox">Back</a>
 <% } %>
@@ -150,7 +156,7 @@
 <% if(dir=="useractivation" ||dir=="sandboxuseractivation"){%> 
     
     <%=header %>
-   
+   <br><br>
     <script>
        
     setTimeout(function () { window.location = "/cspdir.html" ; }, 5000)
@@ -159,10 +165,12 @@
 
     <% } %>  
     
-    <% if(dir=="escapesandbox" ||dir=="sandboxescape"){%> 
+    <% if(dir=="escapesandbox" || dir=="sandboxescape"){%> 
         <h1>allow-popups with escape sandbox</h1>
-        <%=header %>
+         <%=header %>
+        <br><b>
         <iframe src="/iframe/popup.html" width="300px" height="300px"></iframe>
+        <br>
         <a class="btn btn-primary"  href="/csp/sandbox">Back</a>
     
         <% } %>

@@ -14,7 +14,7 @@ router.get("/sharedworkers",function(req,res){
     res.sendFile(path.join(__dirname,"../workers/webworkers/sharedworkers.html"));
 })
 router.get("/serviceworkers",function(req,res){
-    res.sendFile(path.join(__dirname,"../serviceworker.html"));
+    res.sendFile(path.join(__dirname,"../workers/serviceworker.html"));
 })
 router.get("/worklets",function(req,res){
     res.sendFile(path.join(__dirname,"../workers/worklets/audioworklet.html"));

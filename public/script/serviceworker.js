@@ -1,13 +1,11 @@
 
 
-//creating avariable  cachename
+//creating  cache
 var CACHE_NAME="mycatche";
 //moving all files into cache
 var filesaddtoCatche=[
-     "workers/serviceworker/serviceworkers.html",
-    "serviceworker.js",
-   "swmain.js"
-    
+     "/serviceworkers.html",
+   
 
 ];
 
@@ -17,7 +15,7 @@ self.addEventListener("install",function(event){
 console.log("Service worker installed")
     event.waitUntil(
         caches.open(CACHE_NAME).then(function(cache){
-            console.log("Cache opened");
+            //console.log("Cache opened");
             return cache.addAll(filesaddtoCatche)
 
 
@@ -40,12 +38,12 @@ self.addEventListener("fetch",function(event){
 //activate event
 //
 self.addEventListener("activate",function(event){
-console.log("Service Event activated");
+//console.log("Service Event activated");
 });
 
 self.addEventListener("message",function(event){
     event.source.postMessage("Hi client");
-    console.log("Message from server" +event.data);
+    //console.log("Message from server" +event.data);
    
    
     

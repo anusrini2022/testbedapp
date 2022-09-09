@@ -468,12 +468,7 @@ router.get("/sandbox/sameorgindir", function (req, res) {
 router.get("/sandbox/allowformdir", function (req, res) {
   var dir = req.query["dir"];
   var csp = req.query["csp"];
-  (dir);
-  (csp);
-
-
-
-  if (dir == "allowformdir" && csp == "off") {
+ if (dir == "allowformdir" && csp == "off") {
     var msg = "allowformdir";
     var title = "allowform with out csp";
     var obj = { dir: dir, csp: csp, msg: msg, header: header, title: title };
@@ -506,11 +501,7 @@ router.get("/sandbox/topnavdir", function (req, res) {
   var dir = req.query["dir"];
   var csp = req.query["csp"];
   var title = "topnav without csp";
-  (dir);
-  (csp);
-
-
-
+  
   if (dir == "topnavdir" && csp == "off") {
     var msg = "allowformdir";
     var title = "topnav without csp";
@@ -683,13 +674,10 @@ router.get("/sandbox/useractivation", function (req, res) {
 router.get("/sandbox/escapesandboxdir", function (req, res) {
   var dir = req.query["dir"];
   var csp = req.query["csp"];
-  (dir);
-  (csp);
-
-
+ 
 
   if (dir == "escapesandbox" && csp == "off") {
-    var msg = "escapesandbox";
+    var msg = "csp is off";
     var title = "escapesandboxwithoutcsp";
     var obj = { dir: dir, csp: csp, msg: msg, header: "", title: title };
     res.render("csp/sandbox", obj);
@@ -700,8 +688,7 @@ router.get("/sandbox/escapesandboxdir", function (req, res) {
     var header = "Content-Security-Policy,sandbox ";
     var title = "escapesandboxwithcsp";
     var obj = { dir: dir, csp: csp, msg: msg, header: header, title: title };
-    res.setHeader("Content-Security-Policy", "sandbox");
-
+    res.setHeader("Content-Security-Policy", "sandbox allow-popups");
     res.render("csp/sandbox", obj);
 
   }
@@ -711,7 +698,7 @@ router.get("/sandbox/escapesandboxdir", function (req, res) {
     var header = "Content-Security-Policy, sandbox allow-popups-to-escape-sandbox";
     var title = "escapesandbox";
     var obj = { dir: dir, csp: csp, msg: msg, header: header, title: title };
-    res.setHeader("Content-Security-Policy", "sandbox  allow-popups-to-escape-sandbox ");
+    res.setHeader("Content-Security-Policy", "sandbox  allow-popups-to-escape-sandbox");
     res.render("csp/sandbox", obj);
 
   }

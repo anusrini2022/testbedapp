@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%- include("../partials/header") %>
-  
-     <title>formaction</title>
-</head>
-<body>
-    <h1>Form Action</h1>
-      <br>
-    <% if(csp=="" ) { %>
-        <a class="btn btn-primary" href="formaction/dir/?dir=formaction&csp=off" target="_blank">Withoutcsp</a>
-        <a class="btn btn-primary" href="formaction/dir/?dir=formaction&csp=on" target="_blank">Withcsp</a>
-        <% } else{ %>
-        <%= header %>
-        <%= csp %>
-       
 
-        <form action="javascript:alert('Foo')" id="form1" method="post">
-            <input type="text" name="fieldName" value="fieldValue">
-            <input type="submit" id="submit" value="submit">
-          </form>
-          <% } %>
-             <%if(csp=="on") { %> 
-                <%- include("../partials/violationevent") %>
-                 <% } %> 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include("../partials/header") %>
+
+    <title>formaction</title>
+</head>
+
+<body>
+  <h1>Form Action</h1>
+  <br>
+  <% if(csp=="" ) { %>
+    <a class="btn btn-primary" href="formaction/dir/?dir=formaction&csp=off" target="_blank">Withoutcsp</a>
+    <a class="btn btn-primary" href="formaction/dir/?dir=formaction&csp=on" target="_blank">Withcsp</a>
+    <% } else{ %>
+
+
+
+      <form action="javascript:document.write('submitting Form Values')" id="form1" method="post">
+        <input type="text" name="fieldName" value="fieldValue">
+        <input type="submit" id="submit" value="submit">
+      </form>
+      <% } %>
+        <%if(csp=="on") { %>
+          <%- include("../partials/violationevent") %>
+            <% } %>
 
 </body>
+
 </html>

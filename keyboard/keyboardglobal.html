@@ -30,8 +30,6 @@
         var events=[];
 
         function keydownfunction(event) {
-            // console.log("KeydownEvent");
-            // console.log("keyPressed:" + event.key);
             console.log(event);
             var keydown={"EventName": event.type, "keyPressed:" : event.key};
             events.push(keydown);
@@ -41,8 +39,6 @@
 
 
         function keyupfunction() {
-            // console.log("keyupevent");
-            // console.log("keyPressed:" + event.key);
             var keyup={"EventName":event.type,"keyPressed:" : event.key};
             events.push(keyup);
             console.log(events);
@@ -50,14 +46,12 @@
         }
 
         function keypressfunction() {
-            // console.log("keypressEvent");
-            // console.log("keyPressed:" + event.key);
             var keypress={"EventName":event.type,"keyPressed:" : event.key};
             events.push(keypress);
             console.log(events);
             document.getElementById("demo").innerHTML=JSON.stringify(events);
         }
-       // document.write(JSON.stringify(events));
+      
     </script>
 </body>
 

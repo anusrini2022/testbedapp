@@ -15,7 +15,7 @@ res.render("login");
 
 router.post("/login",function(req,res){
 var  users=[] ;
-var myusername="Lava" ;
+var myusername="lava" ;
 var mypassword="hhk9j8f48gkhlk4kjljj7dg66jhkhkkd";
 var username=req.body.uname;
 var password=req.body.password;

@@ -48,14 +48,14 @@ var documentstyleRouter = require("./routes/documentstyle.js");
 var storageRouter = require("./routes/clientsidestorage.js");
 
 
-//create Https listener port at 8080
+//create Https listener port at 4000
 // Provide the private and public key to the server by reading each
 		// file's content with the readFileSync() method.
 https.createServer({
   key: fs.readFileSync("key.pem"),
   cert: fs.readFileSync("cert.pem"),
-},app).listen(8080,()=>{
-  console.log("Https Server is Running at Port:8080");
+},app).listen(4000,()=>{
+  console.log("Https Server is Running at Port:4000");
 })
 
 //Http server listening at 3001
@@ -87,11 +87,12 @@ app.use(bodyParser.json({ type: ['application/json', 'application/csp-report'] }
 const redirectLogin = function (req, res, next) {
 
   if (!req.session.userid) {
-    res.redirect("/");
+   res.redirect("/");
   }
   else {
     next();
   }
+  //next();
 
 }
 
