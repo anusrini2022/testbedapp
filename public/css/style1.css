@@ -24,3 +24,15 @@ p
     right:0;
     top:0;
 }
+#logindiv
+      {
+        width:350px;
+        height:300px;
+        margin-left:600px;
+        margin-top:200px;
+        border:1px solid black;
+      }
+      #loginfrm
+      {
+        width:300px;
+      }
