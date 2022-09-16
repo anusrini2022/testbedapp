@@ -5,7 +5,7 @@ para1.innerHTML="<h3>&nbsp;&lt;This is Main Javascript File</h3>";
 
 function scriptLoad(src)
 {
-    
+ 
 var script=document.createElement("script");
 script.src=src;
 document.body.append(para1);
@@ -15,7 +15,8 @@ document.head.append(script);
 
 //passing the value of src as secondfile.js
 function externalScriptLoad(){
-scriptLoad("/javascript/secondfile.js");
+scriptLoad("/js/secondfile.js");
+//scriptLoad("/javascript/thirdfile.js");
 }
 
 //loading extenal file like bootstrap and jquery

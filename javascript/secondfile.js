@@ -1,7 +1,6 @@
-//alert("This is Second Javascript File appended from second.js");
 //creating script  tag and appending content from the thirdfile.js
 var script=document.createElement("script");
-script.src="thirdfile.js";
+script.src="/js/thirdfile.js";
 
 var para=document.createElement("P");
 

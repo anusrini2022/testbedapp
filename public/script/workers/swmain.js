@@ -7,7 +7,8 @@ if("serviceWorker" in navigator)
 {
   console.log("service worker Supported");
     window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/script/serviceworker.js").then(function(registration){
+    navigator.serviceWorker.register("/script/workers/serviceworker.js").then(function(registration){
+  
       console.log("Service Registeration successful with scope",registration.scope)
 
       //life cycle of serviceworker in registeration object
@@ -35,16 +36,7 @@ if("serviceWorker" in navigator)
           
     })
   })
-    //unregister serviceworker
-    // navigator.serviceWorker.getRegistrations().then((regs)=>
-
-    // {
-    //    for(let reg of regs)
-    //    {
-    //      reg.unregister().then((isUnreg)=>console.log((isUnreg)));
-    //    }
-    // })
-  
+    
    
     ,function(err)
     {
@@ -54,7 +46,7 @@ if("serviceWorker" in navigator)
 
    
     self.addEventListener("message",function(event){
-      console.log("posting data from server to client"+event);
+    console.log("posting data from server to client"+event);
     navigator.postMessage("hi client");
     console.log(`The service worker sent me a message: ${event.data}`);
     console.log(event.data);
@@ -91,17 +83,6 @@ if("serviceWorker" in navigator)
       }
 
     
-  //   if (!window.Notification) {
-  //         alert("This browser does not support desktop notification");
-  //     }
-  //     var prm = Notification.permission;
-  //     if (prm == 'default' || prm == 'denied') {
-  //        console.log("permission denied or default");
-  //     }else{
-  //       console.log("permission granted");
-  //       //configurePushSub();
-  //     }
-      
   
    }
   else
@@ -132,14 +113,7 @@ if ('periodicSync' in registration) {
   console.log(" periodic background sync isn't supported");
 }
 
-//   const status = navigator.permissions.query({name: 'periodic-background-sync'});
-// if (status.state === 'granted') {
-//   // Periodic background sync can be used.
-//   console.log(" Periodic background sync can be used.")
-// } else {
-//   // Periodic background sync cannot be used.
-//   console.log(" Periodic background sync cannot  be used.")
-// }
+
 
 async function registerPeriodicSync() {
   await registration.periodicSync.register('get-daily-news', {
@@ -148,7 +122,7 @@ async function registerPeriodicSync() {
 }
 
 function showNotification(){
-  //alert("Notifictions")
+ 
   const notification=new Notification("New Message from browser",{
    body:"Hi This is new Message",
    
@@ -160,15 +134,20 @@ Notification.requestPermission()
 
 if(Notification.permission==="granted"){
   showNotification();
-  //alert("we Have Permission");
-
+  
 }else if(Notification.permission!=="denied"){
   Notification.requestPermission()
-  // .then(permission=>{
-  //  console.log(permission);
-  //  if(permission==="granted")
-  //  showNotification();
-  // });
+  
 }
 
 }
+
+// if(window.navigator && navigator.serviceWorker) {
+//   navigator.serviceWorker.getRegistrations()
+//   .then(function(registrations) {
+//     for(let registration of registrations) {
+//       registration.unregister();
+//       console.log("serviceworker unregistered")
+//     }
+//   });
+// }

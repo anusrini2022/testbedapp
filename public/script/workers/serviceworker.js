@@ -4,7 +4,9 @@
 var CACHE_NAME="mycatche";
 //moving all files into cache
 var filesaddtoCatche=[
-     "/serviceworkers.html",
+     "../workers/serviceworker.html" ,
+     "/swmain.js",
+     "/serviceworker.js"
    
 
 ];
@@ -27,23 +29,43 @@ console.log("Service worker installed")
 });
 //
 
-//fetch event
-self.addEventListener("fetch",function(event){
-    console.log("inetercepting",event.request);
-    console.log("Service Worker: Fetching Event");
- 
 
-});
 
 //activate event
-//
+//fetch event
+self.addEventListener("fetch",function(event){
+  console.log("Service Worker: Fetching Event");
+  event.respondWith(
+    fetch(event.request)
+      .catch(() => {
+        return caches.open(CACHE_NAME)
+          .then((cache) => {
+            return cache.match(event.request)
+          })
+      })
+  )
+
+});
 self.addEventListener("activate",function(event){
-//console.log("Service Event activated");
+console.log("Service Event activated");
+event.waitUntil(
+  caches.keys()
+    .then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+        if (key  !== CACHE_NAME) {
+          console.log('[ServiceWorker] Removing old cache', key)
+          return caches.delete(key)
+        }
+      }))
+    })
+    .then(() => self.clients.claim())
+)
+
 });
 
 self.addEventListener("message",function(event){
     event.source.postMessage("Hi client");
-    //console.log("Message from server" +event.data);
+    console.log("Message from server" +event.data);
    
    
     
