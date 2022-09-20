@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communications</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>form</h1>
+    <form method="post" id="frm" action="/communications">
+        <input type="text" name="method" id="txtval" value="htmlsubmit" disabled>
+        <button type="submit" id="submitbtn">submit</button>
+        <p id="reshtml"></p>
+        <p id="resajax"></p>
+        <p id="resfetch"></p>
+        <p id="resbeacon"></p>
+        <p id="reswebsocket"></p>
+        <p id="resjquery"></p>
+        <p id="resaxios"></p>
+
+        <p id="status"></p>
+        <p id="data"></p>
+    </form>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var submethod = ["htmlsubmit", "ajaxmethod", "axiosmethod", "jquerymethod", "fetchmethod", "sendbeacon", "websocket", "window-open"]
+        //var inputval="jquery";
+        var frm = document.getElementById("frm");
+        var txtval=document.getElementById("txtval").value;
+        var submitbtn = document.getElementById("submitbtn")
+        for (var i = 0; i < submethod.length; i++) {
+            switch (i) {
+                //javascript post
+                case 0:
+
+                    submitbtn.addEventListener("click", function () {
+                        //frm.submit(); 
+                        document.getElementById("reshtml").innerHTML += "Form submitted using Html Post Method"
+                    });
+                    break;
+
+                //ajax    
+                case 1:
+                     txtval="ajax";
+                     alert(txtval);
+                    frm.addEventListener("submit", function (event) {
+                        event.preventDefault();
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function () {
+                            if (this.readyState == 4 && this.status == 200)
+                                document.getElementById("resajax").innerHTML += this.responseText;
+                        }
+                        xhttp.open("POST", "/communications/ajax", true);
+                        xhttp.setRequestHeader("Content-type", "x-www-form-urlencoded")
+                        xhttp.send(`method:${txtval}`);
+                    });
+
+                    break;
+
+                //fetch method
+                case 2:
+                    frm.addEventListener("submit", function (event) {
+                        event.preventDefault();
+                        fetch("/communications/fetch",
+                            {
+                                method: 'POST',
+                                body: JSON.stringify({
+                                    method: "fetch"
+
+                                }),
+                                headers: {
+                                    'Content-type': 'application/json; charset=UTF-8'
+                                }
+                            })
+                            .then(function (response) {
+                                return response.json();
+                            })
+                            .then(function (data) {
+
+                                var resfetch = document.getElementById("resfetch");
+                                var data = JSON.stringify(data);
+                                resfetch.innerHTML += `Form submitted using ${data} method`;
+                            })
+
+                            .catch(error => console.error("Error:", error))
+                    });
+
+
+                    break;
+                // jquery method
+                case 3:
+
+                    $("#frm").on("submit", function (eve) {
+                        eve.preventDefault();
+                        $.post("/communications/jquery", { data: "jquery" }, function (data, status) {
+                            //$("#status").html(status);  
+                            $("#resjquery").html(data);
+                        });
+                    })
+
+                    break;
+                //sendbeacon
+                case 4:
+                    frm.addEventListener("submit", function (eve) {
+                        eve.preventDefault();
+                        // URL to send the data to
+                        let url = '/communications/sendbeacon';
+
+                        // Create a new FormData and add a key/value pair
+                        let data = { "method": "form submitted using sendbeacon method" }
+                        let result = navigator.sendBeacon(url, JSON.stringify(data));
+                        document.getElementById("resbeacon").innerHTML += JSON.stringify(data);
+                    })
+                    break;
+
+                //axios  
+                case 5:
+                    frm.addEventListener("submit", async function (eve) {
+                        eve.preventDefault();
+
+                        var data = {
+                            "method": "Form submitted using axios"
+                        }
+                        try {
+                            const response = await axios.post("/communications/axios", data)
+                            //document.getElementById("status").innerHTML = "Status:" + response.status;
+                            document.getElementById("resaxios").innerHTML += "Data:" + JSON.stringify(response.data);
+                        } catch (error) {
+                            if (error.respnse) {
+                                console.log(error.response.status)
+                            }
+                            else {
+                                console.log(error.message)
+                            }
+                        }
+
+                    })
+                    break;
+                //websocket 
+                case 6:
+                    frm.addEventListener("submit", function (event) {
+                        event.preventDefault();
+
+                        //connecting to  endpoint
+                        const ws = new WebSocket("ws:localhost:8081");
+                        //connection opened and submitting form data
+                        ws.addEventListener("open", function (eve) {
+                            ws.send(JSON.stringify({ "method": "websocket" }));
+
+                        });
+
+
+                        //postingback data from the server
+                        ws.addEventListener("message", function (eve) {
+                            document.getElementById("reswebsocket").innerHTML = `Form submitted using ${eve.data}`;
+                        })
+                    });
+                    break;
+
+                case 7:
+
+                    frm.addEventListener("submit", function (event) {
+                        event.preventDefault();
+                        // function openWindow() {
+
+                        //     window.open("/communications/childwindow", width = "300px", height = "100px", left = "100px");
+                        // }
+                    });
+                    break;
+            }
+
+        }
+    </script>
+</body>
+
+
+</html>
