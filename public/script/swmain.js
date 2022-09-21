@@ -7,7 +7,7 @@ if("serviceWorker" in navigator)
 {
   console.log("service worker Supported");
     window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/script/workers/serviceworker.js").then(function(registration){
+    navigator.serviceWorker.register("/script/serviceworker.js").then(function(registration){
   
       console.log("Service Registeration successful with scope",registration.scope)
 

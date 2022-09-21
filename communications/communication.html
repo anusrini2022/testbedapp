@@ -37,7 +37,7 @@
                 //javascript post
                 case 0:
 
-                    submitbtn.addEventListener("click", function () {
+                    window.addEventListener("load", function () {
                         //frm.submit(); 
                         document.getElementById("reshtml").innerHTML += "Form submitted using Html Post Method"
                     });
@@ -46,8 +46,7 @@
                 //ajax    
                 case 1:
                      txtval="ajax";
-                     alert(txtval);
-                    frm.addEventListener("submit", function (event) {
+                      window.addEventListener("load", function (event) {
                         event.preventDefault();
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function () {
@@ -56,21 +55,21 @@
                         }
                         xhttp.open("POST", "/communications/ajax", true);
                         xhttp.setRequestHeader("Content-type", "x-www-form-urlencoded")
-                        xhttp.send(`method:${txtval}`);
+                        xhttp.send(`method=${txtval}`);
                     });
 
                     break;
 
                 //fetch method
                 case 2:
-                    frm.addEventListener("submit", function (event) {
+                    window.addEventListener("load", function (event) {
                         event.preventDefault();
                         fetch("/communications/fetch",
                             {
                                 method: 'POST',
                                 body: JSON.stringify({
-                                    method: "fetch"
-
+                                    
+                                    msg:"Form submitted using fetch method"
                                 }),
                                 headers: {
                                     'Content-type': 'application/json; charset=UTF-8'
@@ -83,7 +82,7 @@
 
                                 var resfetch = document.getElementById("resfetch");
                                 var data = JSON.stringify(data);
-                                resfetch.innerHTML += `Form submitted using ${data} method`;
+                                resfetch.innerHTML =data;
                             })
 
                             .catch(error => console.error("Error:", error))
@@ -93,8 +92,9 @@
                     break;
                 // jquery method
                 case 3:
+                    
 
-                    $("#frm").on("submit", function (eve) {
+                window.addEventListener("load", function (eve) {
                         eve.preventDefault();
                         $.post("/communications/jquery", { data: "jquery" }, function (data, status) {
                             //$("#status").html(status);  
@@ -105,13 +105,13 @@
                     break;
                 //sendbeacon
                 case 4:
-                    frm.addEventListener("submit", function (eve) {
+                window.addEventListener("load", function (eve) {
                         eve.preventDefault();
                         // URL to send the data to
                         let url = '/communications/sendbeacon';
 
                         // Create a new FormData and add a key/value pair
-                        let data = { "method": "form submitted using sendbeacon method" }
+                        let data =  "Form submitted using sendbeacon method" ;
                         let result = navigator.sendBeacon(url, JSON.stringify(data));
                         document.getElementById("resbeacon").innerHTML += JSON.stringify(data);
                     })
@@ -119,16 +119,16 @@
 
                 //axios  
                 case 5:
-                    frm.addEventListener("submit", async function (eve) {
+                window.addEventListener("load", async function (eve) {
                         eve.preventDefault();
 
                         var data = {
-                            "method": "Form submitted using axios"
+                        method: "Form submitted using axios"
                         }
                         try {
                             const response = await axios.post("/communications/axios", data)
                             //document.getElementById("status").innerHTML = "Status:" + response.status;
-                            document.getElementById("resaxios").innerHTML += "Data:" + JSON.stringify(response.data);
+                            document.getElementById("resaxios").innerHTML +=  JSON.stringify(response.data);
                         } catch (error) {
                             if (error.respnse) {
                                 console.log(error.response.status)
@@ -142,7 +142,7 @@
                     break;
                 //websocket 
                 case 6:
-                    frm.addEventListener("submit", function (event) {
+                window.addEventListener("load", function (event) {
                         event.preventDefault();
 
                         //connecting to  endpoint

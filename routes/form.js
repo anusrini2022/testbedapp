@@ -38,7 +38,7 @@ router.get("/axios", function (req, res) {
 
 //http://localhost:3001/form/jquery
 router.get("/jquery", function (req, res) {
-   
+    res.sendFile(path.join(__dirname, "../form/jquerysubmitform.html"));  
 })
 
 

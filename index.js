@@ -25,7 +25,7 @@ wss.on("connection", function (ws) {
 
   ws.on("message", function (data) {
     const res = JSON.parse(data);
-    ws.send(res.uname);
+    ws.send(res.method);
   });
 });
 
@@ -42,6 +42,7 @@ var mediaRouter = require("./routes/media");
 var scriptsrcRouter = require("./routes/csp/csp");
 var framedemoRouter = require("./routes/framedemo");
 var formRouter = require("./routes/form");
+var communicationRouter = require("./routes/communications");
 var workersRouter = require("./routes/workers");
 var insecureddomRouter = require("./routes/insecureddom");
 var documentstyleRouter = require("./routes/documentstyle.js");
@@ -121,6 +122,7 @@ app.use("/media", redirectLogin, mediaRouter)
 app.use("/frame", redirectLogin, framedemoRouter);
 app.use("/workers", redirectLogin, workersRouter);
 app.use("/form", redirectLogin, formRouter);
+app.use("/communications", redirectLogin, communicationRouter);
 app.use("/insecureddom", redirectLogin, insecureddomRouter);
 app.use("/documentstyle", redirectLogin, documentstyleRouter);
 app.use("/clientsidestorage", redirectLogin, storageRouter);
@@ -141,7 +143,7 @@ app.use("/js", express.static(__dirname + "public/js"));
 app.use("/script", express.static(__dirname + "public/script"));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001/userdet");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001/axios");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"

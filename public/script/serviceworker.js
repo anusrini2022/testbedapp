@@ -5,10 +5,8 @@ var CACHE_NAME="mycatche";
 //moving all files into cache
 var filesaddtoCatche=[
      "../workers/serviceworker.html" ,
-     "/swmain.js",
-     "/serviceworker.js"
-   
-
+     "swmain.js",
+     "serviceworker.js"
 ];
 
 
