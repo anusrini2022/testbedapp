@@ -36,9 +36,10 @@
  <button class="btn btn-primary" onclick="inlineScriptLoad()">inlinescript</button>  
  <button class="btn btn-primary" onclick="externalScriptLoad()">ExternalScript</button>
  <button class="btn btn-primary" onclick="thirdpartyScriptLoad()">ThirdPartyScript</button>
-  <a class="btn btn-primary" href="/javascript/nonce">nonce</a>
-  <a class="btn btn-primary" href="/javascript/subresourceintegrity">SubresourceIntegrity</a>
-
+  <button class="btn btn-primary" onclick="createNonce()">Nonce</button>
+  <button class="btn btn-primary" onclick="createSubResourceIntegrity()">SubresourceIntegrity</button>
+   <p id="nonce"></p>
+   <p id="sri"></p>
    
    
   <script>
@@ -52,6 +53,18 @@
    }
   </script>
 
+<script nonce="qwtewtwe123444">
+  function createNonce()
+  {
+  document.getElementById("nonce") .innerHTML="Nonce created";
+  }
+</script>
+
+<script integrity="sha384-iWIRnh1mEAsxvoFGl6dSBy/fgYdaVI16SrFHXjGiy3eqzwlBPiB+by54TKsF0JTu">
+function createSubResourceIntegrity(){
+document.getElementById("sri").innerHTML="Subresource Integrity Created";
+}
+</script>
  
  
 </body>
