@@ -14,6 +14,7 @@
     <form method="post" id="frm" action="/communications">
         <input type="text" name="method" id="txtval" value="htmlsubmit" disabled>
         <button type="submit" id="submitbtn">submit</button>
+        <!--Paragraph tags display response-->
         <p id="reshtml"></p>
         <p id="resajax"></p>
         <p id="resfetch"></p>
@@ -21,37 +22,36 @@
         <p id="reswebsocket"></p>
         <p id="resjquery"></p>
         <p id="resaxios"></p>
-
         <p id="status"></p>
         <p id="data"></p>
     </form>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        var submethod = ["htmlsubmit", "ajaxmethod", "axiosmethod", "jquerymethod", "fetchmethod", "sendbeacon", "websocket", "window-open"]
+      //array holds various types of posting method in javascript  
+      var submethod = ["htmlsubmit", "ajaxmethod", "fetchmethod", "jquerymethod", "sendbeacon", "axios","websocket", "window-open"]
         //var inputval="jquery";
         var frm = document.getElementById("frm");
-        var txtval=document.getElementById("txtval").value;
+        var txtval = document.getElementById("txtval").value;
         var submitbtn = document.getElementById("submitbtn")
         for (var i = 0; i < submethod.length; i++) {
             switch (i) {
                 //javascript post
                 case 0:
-
                     window.addEventListener("load", function () {
-                        //frm.submit(); 
-                        document.getElementById("reshtml").innerHTML += "Form submitted using Html Post Method"
+                    //frm.submit(); 
+                    document.getElementById("reshtml").innerHTML += "Form submitted using Html Post Method"
                     });
                     break;
 
                 //ajax    
                 case 1:
-                     txtval="ajax";
-                      window.addEventListener("load", function (event) {
-                        event.preventDefault();
-                        var xhttp = new XMLHttpRequest();
-                        xhttp.onreadystatechange = function () {
-                            if (this.readyState == 4 && this.status == 200)
-                                document.getElementById("resajax").innerHTML += this.responseText;
+                     var txtval = "ajax";
+                     window.addEventListener("load", function (event) {
+                     event.preventDefault();
+                     var xhttp = new XMLHttpRequest();
+                     xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200)
+                        document.getElementById("resajax").innerHTML += this.responseText;
                         }
                         xhttp.open("POST", "/communications/ajax", true);
                         xhttp.setRequestHeader("Content-type", "x-www-form-urlencoded")
@@ -68,33 +68,29 @@
                             {
                                 method: 'POST',
                                 body: JSON.stringify({
-                                    
-                                    msg:"Form submitted using fetch method"
+                                    msg: "Form submitted using fetch method"
                                 }),
                                 headers: {
                                     'Content-type': 'application/json; charset=UTF-8'
                                 }
                             })
                             .then(function (response) {
-                                return response.json();
+                                return response.text();
                             })
                             .then(function (data) {
 
                                 var resfetch = document.getElementById("resfetch");
-                                var data = JSON.stringify(data);
-                                resfetch.innerHTML =data;
+                                resfetch.innerHTML = data;
                             })
 
                             .catch(error => console.error("Error:", error))
                     });
 
-
                     break;
                 // jquery method
                 case 3:
-                    
 
-                window.addEventListener("load", function (eve) {
+                    window.addEventListener("load", function (eve) {
                         eve.preventDefault();
                         $.post("/communications/jquery", { data: "jquery" }, function (data, status) {
                             //$("#status").html(status);  
@@ -105,30 +101,30 @@
                     break;
                 //sendbeacon
                 case 4:
-                window.addEventListener("load", function (eve) {
+                    window.addEventListener("load", function (eve) {
                         eve.preventDefault();
                         // URL to send the data to
                         let url = '/communications/sendbeacon';
 
                         // Create a new FormData and add a key/value pair
-                        let data =  "Form submitted using sendbeacon method" ;
+                        let data = "Form submitted using sendbeacon method";
                         let result = navigator.sendBeacon(url, JSON.stringify(data));
-                        document.getElementById("resbeacon").innerHTML += JSON.stringify(data);
+                        document.getElementById("resbeacon").innerHTML += data;
                     })
                     break;
 
                 //axios  
                 case 5:
-                window.addEventListener("load", async function (eve) {
+                    window.addEventListener("load", async function (eve) {
                         eve.preventDefault();
 
                         var data = {
-                        method: "Form submitted using axios"
+                            method: "axios"
                         }
                         try {
                             const response = await axios.post("/communications/axios", data)
                             //document.getElementById("status").innerHTML = "Status:" + response.status;
-                            document.getElementById("resaxios").innerHTML +=  JSON.stringify(response.data);
+                            document.getElementById("resaxios").innerHTML += response.data;
                         } catch (error) {
                             if (error.respnse) {
                                 console.log(error.response.status)
@@ -142,7 +138,7 @@
                     break;
                 //websocket 
                 case 6:
-                window.addEventListener("load", function (event) {
+                    window.addEventListener("load", function (event) {
                         event.preventDefault();
 
                         //connecting to  endpoint
@@ -156,19 +152,14 @@
 
                         //postingback data from the server
                         ws.addEventListener("message", function (eve) {
-                            document.getElementById("reswebsocket").innerHTML = `Form submitted using ${eve.data}`;
+                            document.getElementById("reswebsocket").innerHTML = `Form submitted using ${eve.data} method`;
                         })
                     });
                     break;
 
                 case 7:
-
-                    frm.addEventListener("submit", function (event) {
-                        event.preventDefault();
-                        // function openWindow() {
-
-                        //     window.open("/communications/childwindow", width = "300px", height = "100px", left = "100px");
-                        // }
+                    window.addEventListener("load", function () {
+                        window.open("/communications/childwindow", width = "100px", height = "100px", left = "100px");
                     });
                     break;
             }
