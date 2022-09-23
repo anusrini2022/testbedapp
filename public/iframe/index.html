@@ -6,13 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iframe in javascript </title>
+   
+    <script src="/js/loadingiframe.js"></script>
+    <script src="/js/hiddeniframe.js"></script>
+    <script src="/js/minimizediframe.js"></script>
 </head>
 
 <body>
     <h1>Types of Iframes</h1>
-    <a href="loadingiframe.html">IframeOnload</a>
-    <a href="hiddeniframe.html">HiddenIframe</a>
-    <a href="minimizediframe.html">minimizediframe</a>
+    <button  onclick="loadIframe()">IframeOnload</button>
+    <button onclick="hiddenIframe()">HiddenIframe</button>
+    <button onclick="minimizedIframe()">minimizediframe</button>
 
     <h3>Click here to open iframe</h3>
     <button onclick="showFrame()">open iframe</button>
