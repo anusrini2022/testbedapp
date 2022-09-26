@@ -20,8 +20,10 @@ var mypassword="hhk9j8f48gkhlk4kjljj7dg66jhkhkkd";
 var username=req.body.uname;
 var password=req.body.password;
 var sess;
+
 if(username==myusername&& password==mypassword)
 {
+  
 
 sess=req.session;
 //storing the username inside the variable in session.userid
